@@ -20,6 +20,7 @@ export const enLocale: LocalePlugin = {
     "settings.themeLight": "Light",
     "settings.themeDark": "Dark",
     "settings.themeSystem": "System",
+    "settings.themeMacchiato": "Catppuccin Macchiato",
     "settings.languageDescription": "Choose the language used throughout the interface.",
     "settings.shellTool": "Shell tool",
     "settings.shellToolDescription": "Choose which shell the model uses for commands. Direct ! and !! commands still use Bash.",

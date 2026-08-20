@@ -20,6 +20,7 @@ export const zhCNLocale: LocalePlugin = {
     "settings.themeLight": "浅色",
     "settings.themeDark": "深色",
     "settings.themeSystem": "跟随系统",
+    "settings.themeMacchiato": "Catppuccin Macchiato",
     "settings.languageDescription": "选择整个界面使用的语言。",
     "settings.shellTool": "Shell 工具",
     "settings.shellToolDescription": "选择模型执行命令时使用的 Shell。直接输入的 ! 和 !! 命令仍使用 Bash。",

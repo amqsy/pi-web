@@ -228,3 +228,38 @@ test("renders custom-message images as buttons that open a larger preview", () =
   assert.match(html, /<button[^>]+aria-label="Preview image"[^>]*>/);
   assert.match(html, /<img[^>]+src="data:image\/png;base64,YWJj"/);
 });
+
+test("auto-expands thinking block when streaming", () => {
+  const html = renderMessage({
+    role: "assistant",
+    provider: "google",
+    model: "gemini-3.7-flash",
+    content: [{ type: "thinking", thinking: "Analyzing the repository structure..." }],
+  }, { isStreaming: true });
+
+  assert.match(html, /Thinking/);
+  assert.match(html, /Analyzing the repository structure\.\.\./);
+});
+
+test("shows thinking placeholder when streaming without text yet", () => {
+  const html = renderMessage({
+    role: "assistant",
+    provider: "google",
+    model: "gemini-3.7-flash",
+    content: [{ type: "thinking", thinking: "" }],
+  }, { isStreaming: true });
+
+  assert.match(html, /Thinking\.\.\./);
+});
+
+test("collapses thinking block by default when loaded completed", () => {
+  const html = renderMessage({
+    role: "assistant",
+    provider: "google",
+    model: "gemini-3.7-flash",
+    content: [{ type: "thinking", thinking: "Finished reasoning about the task." }],
+  }, { isStreaming: false });
+
+  assert.match(html, /Thinking/);
+  assert.doesNotMatch(html, /Finished reasoning about the task\./);
+});

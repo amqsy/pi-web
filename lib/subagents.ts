@@ -96,7 +96,7 @@ const BUILTIN_PROFILES: SubagentProfile[] = [
   {
     name: "general-purpose",
     displayName: "General purpose",
-    description: "Handle a focused implementation or investigation task",
+    description: "Autonomous task execution. Handle focused implementations, multi-step changes, or deep investigation in an isolated context",
     systemPrompt: "Work autonomously on the delegated task. Keep the final answer concise and include important files, decisions, and remaining risks.",
     tools: DEFAULT_TOOLS,
     loadSkills: false,
@@ -109,8 +109,17 @@ const BUILTIN_PROFILES: SubagentProfile[] = [
   {
     name: "explore",
     displayName: "Explore",
-    description: "Quickly inspect a codebase without modifying it",
-    systemPrompt: "Explore the codebase to answer the delegated question. Do not modify files. Report concrete findings with file paths and relevant symbols.",
+    description: "Fast read-only exploration. Search across files and locate symbols without polluting main context. Returns strictly: key file paths, symbols/lines, and summary",
+    systemPrompt: `Explore the codebase to answer the delegated question. Do not modify files.
+
+【Strict Output Contract / 输出契约】
+Your final response MUST follow this structured format strictly:
+1. 核心结论 (Summary): 1~2 句话直接回答核心问题，严禁无意义客套与铺垫。
+2. 关键文件与位置 (Key Locations):
+   - 必须精确列出文件路径与关键符号/行号（格式如 path/to/file.ts:42，包含函数/类/字段名）。
+   - 每个位置简述其核心职责。
+3. 关键依赖与调用流 (Call Flow & Dependencies): 用简洁要点说明调用链或数据流向。
+4. 约束限制: 严禁粘贴大段原始代码，严禁输出试错过程或冗余散文，保持高信息密度。`,
     tools: [...PRESET_READ_ONLY],
     loadSkills: false,
     loadExtensions: false,
@@ -122,8 +131,19 @@ const BUILTIN_PROFILES: SubagentProfile[] = [
   {
     name: "plan",
     displayName: "Plan",
-    description: "Design an implementation plan without modifying files",
-    systemPrompt: "Produce an implementation-ready plan for the delegated task. Inspect the repository as needed, do not modify files, and call out dependencies, risks, and verification steps.",
+    description: "Design an implementation-ready plan before editing files. Returns strictly: target files, atomic steps, risks, and verification commands",
+    systemPrompt: `Produce an implementation-ready plan for the delegated task. Inspect the repository as needed, do not modify files.
+
+【Strict Output Contract / 输出契约】
+Your final response MUST follow this structured format strictly:
+1. 方案目标 (Objective): 1 句话阐明实现目标与核心思路。
+2. 涉及文件清单 (Target Files):
+   - 精确列出每个需要新增（Create）、修改（Modify）或删除（Delete）的文件路径及对应行号/函数。
+3. 原子化分步实施步骤 (Step-by-Step Execution Plan):
+   - 按依赖顺序排列的实施步骤，每步明确具体改动逻辑与工具。
+4. 风险与破坏性检查 (Risks & Dependencies): 潜在副作用、边界情况或破坏性变更。
+5. 验证与验收指令 (Verification): 具体的验证命令（测试用例、构建命令或检查步骤）。
+6. 约束限制: 方案必须清晰、原子化、可执行，严禁含糊其辞或贴大段未改动的完整代码。`,
     tools: [...PRESET_READ_ONLY],
     loadSkills: false,
     loadExtensions: false,

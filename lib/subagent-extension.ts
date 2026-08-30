@@ -113,9 +113,12 @@ export function createSubagentExtension(
         description: `Delegate a focused task to a configured subagent. Each subagent runs as a full, inspectable Pi session. Use background mode for independent work and foreground mode when the result is needed immediately.\n\nAvailable agent types:\n${agentTypeDescription(profiles)}`,
         promptSnippet: "Delegate a focused task to an inspectable subagent session",
         promptGuidelines: [
-          "Use Agent for a focused task that benefits from an isolated context.",
-          "Use multiple background Agent calls in the same response for independent parallel work.",
+          "You are the orchestrator. Aggressively delegate exploration, planning, and high-context tasks to subagents to preserve main session context hygiene.",
+          "Prioritize delegating multi-file searches, architecture mapping, and symbol investigations to the 'explore' subagent instead of running repetitive grep/find/read commands in the main session.",
+          "Delegate complex implementation planning to the 'plan' subagent before making non-trivial modifications.",
+          "Launch multiple background Agent calls (run_in_background: true) in parallel within a single response for independent subtasks or comparisons.",
           "Do not duplicate work already delegated to a running subagent.",
+          "Keep the main session focused on coordination, synthesized answers, and targeted file edits.",
         ],
         executionMode: "parallel",
         parameters: Type.Object({
@@ -236,6 +239,29 @@ export function createSubagentExtension(
           }
         },
       }));
+
+      if (typeof pi.on === "function") {
+        pi.on("before_agent_start", async (event, ctx) => {
+          try {
+            const branch = ctx.sessionManager?.getBranch?.() ?? [];
+            const isMultiTurn = branch.some(
+              (entry) => entry.type === "message" && (entry as { message?: { role?: string } }).message?.role === "assistant",
+            );
+
+            if (isMultiTurn) {
+              return {
+                systemPrompt: `${event.systemPrompt}\n\n` +
+                  "【多轮会话指挥官强制守则（Multi-Turn Orchestrator Rule）】：\n" +
+                  "当前处于多轮交互中。严禁受历史问答惯性影响而在主会话中亲自做盲目探索、试错排查或方案设计！\n" +
+                  "若用户当轮需求涉及：①代码/符号/模块定位 ②未明确根因的报错调查 ③多步骤实施方案，必须强制打断自我执行，优先调用 Agent（explore/plan）子代理！\n" +
+                  "explore 与 plan 子代理已遵循严格输出契约（返回明确文件路径:行号、关键符号与精炼结论）。主会话仅负责接收结论、与用户决策确认以及针对已知路径文件的精细修改（edit）。",
+              };
+            }
+          } catch {
+            // Ignore errors and proceed with standard system prompt
+          }
+        });
+      }
     },
   };
 }

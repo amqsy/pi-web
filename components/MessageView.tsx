@@ -883,7 +883,7 @@ function ThinkingBlock({ block, duration, sessionId, entryId, blockIndex, isStre
   isStreaming?: boolean;
 }) {
   const { t } = useI18n();
-  const [expanded, setExpanded] = useState(() => Boolean(isStreaming));
+  const [expanded, setExpanded] = useState(() => Boolean(isStreaming || !block.deferred));
   const [content, setContent] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);

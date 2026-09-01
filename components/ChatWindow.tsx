@@ -771,7 +771,7 @@ export function ChatWindow({ session, searchTarget, onSearchTargetHandled, sessi
                 if (idx === lastUserIdx) { (lastUserMsgRef as { current: HTMLDivElement | null }).current = el; }
               };
 
-              const renderMessage = (idx: number, options: { attachRef?: boolean; keyPrefix?: string; messageOverride?: AgentMessage; showTimestamp?: boolean; writtenFiles?: WrittenFile[]; isStreaming?: boolean } = {}): ReactNode => {
+              const renderMessage = (idx: number, options: { attachRef?: boolean; keyPrefix?: string; messageOverride?: AgentMessage; showTimestamp?: boolean; writtenFiles?: WrittenFile[] } = {}): ReactNode => {
                 const msg = options.messageOverride ?? messages[idx];
                 const prevAssistantEntryId =
                   msg.role === "user" && idx > 0 && messages[idx - 1].role === "assistant"
@@ -799,7 +799,6 @@ export function ChatWindow({ session, searchTarget, onSearchTargetHandled, sessi
                   <MessageView
                     key={`${keyPrefix}-view-${messageKey}`}
                     message={msg}
-                    isStreaming={options.isStreaming}
                     toolResults={toolResultsMap}
                     modelNames={modelNames}
                     cwd={messageCwd}
@@ -844,7 +843,7 @@ export function ChatWindow({ session, searchTarget, onSearchTargetHandled, sessi
 
                 if (finalAssistantIdx === -1) {
                   for (let renderIdx = userIdx; renderIdx < endIdx; renderIdx++) {
-                    rendered.push(renderMessage(renderIdx, { isStreaming: isLiveTail && renderIdx > userIdx }));
+                    rendered.push(renderMessage(renderIdx));
                   }
                   idx = endIdx;
                   continue;
@@ -852,7 +851,7 @@ export function ChatWindow({ session, searchTarget, onSearchTargetHandled, sessi
 
                 if (isLiveTail) {
                   for (let renderIdx = userIdx; renderIdx < endIdx; renderIdx++) {
-                    rendered.push(renderMessage(renderIdx, { isStreaming: renderIdx > userIdx }));
+                    rendered.push(renderMessage(renderIdx));
                   }
                   idx = endIdx;
                   continue;

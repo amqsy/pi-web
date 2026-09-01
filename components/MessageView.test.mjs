@@ -252,7 +252,19 @@ test("shows thinking placeholder when streaming without text yet", () => {
   assert.match(html, /Thinking\.\.\./);
 });
 
-test("collapses thinking block by default when loaded completed", () => {
+test("collapses thinking block by default when loaded deferred from history", () => {
+  const html = renderMessage({
+    role: "assistant",
+    provider: "google",
+    model: "gemini-3.7-flash",
+    content: [{ type: "thinking", thinking: "", deferred: true }],
+  }, { isStreaming: false });
+
+  assert.match(html, /Thinking/);
+  assert.doesNotMatch(html, /Analyzing/);
+});
+
+test("keeps thinking block expanded for live completed messages", () => {
   const html = renderMessage({
     role: "assistant",
     provider: "google",
@@ -261,5 +273,23 @@ test("collapses thinking block by default when loaded completed", () => {
   }, { isStreaming: false });
 
   assert.match(html, /Thinking/);
-  assert.doesNotMatch(html, /Finished reasoning about the task\./);
+  assert.match(html, /Finished reasoning about the task\./);
+});
+
+test("shows token estimate badge only while actively streaming", () => {
+  const streamingHtml = renderMessage({
+    role: "assistant",
+    provider: "google",
+    model: "gemini-3.7-flash",
+    content: [{ type: "text", text: "Hello world this is a test response." }],
+  }, { isStreaming: true });
+  assert.match(streamingHtml, /Estimated token count while streaming/);
+
+  const completedHtml = renderMessage({
+    role: "assistant",
+    provider: "google",
+    model: "gemini-3.7-flash",
+    content: [{ type: "text", text: "Hello world this is a test response." }],
+  }, { isStreaming: false });
+  assert.doesNotMatch(completedHtml, /Estimated token count while streaming/);
 });

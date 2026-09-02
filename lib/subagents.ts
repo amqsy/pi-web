@@ -97,7 +97,22 @@ const BUILTIN_PROFILES: SubagentProfile[] = [
     name: "general-purpose",
     displayName: "General purpose",
     description: "Autonomous task execution. Handle focused implementations, multi-step changes, or deep investigation in an isolated context",
-    systemPrompt: "Work autonomously on the delegated task. Keep the final answer concise and include important files, decisions, and remaining risks.",
+    systemPrompt: `Work autonomously on the delegated task.
+
+【Strict Output Contract / 输出契约】
+Your final response MUST follow this structured format strictly:
+1. 执行结论: 明确说明成功/失败及产物路径。
+2. 核心操作与测试验证结果: 列出主要操作与命令/测试验证结果。
+3. 遗留问题与风险: 潜在隐患、未解决项或注意事项。
+4. 高危操作审计: 若执行中触发了下方「高危操作清单」，必须单独列出已执行的高危命令及理由（未触发则注明「未触发高危操作」）。
+
+【高危操作清单（High-Risk Operations）】
+凡涉及以下操作，必须审慎并在最终结论第 4 项中单独列出及说明理由：
+- 破坏性文件操作：rm -rf（非 temp 目录）、批量删除未备份源码/资产；
+- Git 破坏性操作：git reset --hard、git clean -fd、git checkout -f、git push --force 等丢弃未提交改动或重写历史的操作；
+- 系统级变更：修改系统环境变量、注册表、停止/删除系统服务、运行提权命令；
+- 进程与环境：强制杀除宿主或其他重要进程（如 kill -9、taskkill /F、pkill）；
+- 权限与安全绕过：越权提权、放开高危文件系统权限等。`,
     tools: DEFAULT_TOOLS,
     loadSkills: false,
     loadExtensions: false,
@@ -119,7 +134,10 @@ Your final response MUST follow this structured format strictly:
    - 必须精确列出文件路径与关键符号/行号（格式如 path/to/file.ts:42，包含函数/类/字段名）。
    - 每个位置简述其核心职责。
 3. 关键依赖与调用流 (Call Flow & Dependencies): 用简洁要点说明调用链或数据流向。
-4. 约束限制: 严禁粘贴大段原始代码，严禁输出试错过程或冗余散文，保持高信息密度。`,
+4. 置信度 (Confidence Level): 必须明确标注为「已覆盖全部相关调用点」或「存在未探明分支，原因：xxx」。
+5. 约束限制与篇幅硬上限:
+   - 篇幅硬上限：不超过 30 行，严禁粘贴大段原始代码，严禁输出试错过程或冗余散文，保持最高信息密度。
+   - 若探索未能定位到足够信息，必须如实标注「未定位到 xxx，建议缩小范围重试」，不得强行给出结论凑数。`,
     tools: [...PRESET_READ_ONLY],
     loadSkills: false,
     loadExtensions: false,
@@ -136,14 +154,18 @@ Your final response MUST follow this structured format strictly:
 
 【Strict Output Contract / 输出契约】
 Your final response MUST follow this structured format strictly:
-1. 方案目标 (Objective): 1 句话阐明实现目标与核心思路。
-2. 涉及文件清单 (Target Files):
+1. 方案核心目标 (Objective): 1 句话阐明实现目标与核心思路。
+2. 目标文件修改清单 (Target Files):
    - 精确列出每个需要新增（Create）、修改（Modify）或删除（Delete）的文件路径及对应行号/函数。
 3. 原子化分步实施步骤 (Step-by-Step Execution Plan):
    - 按依赖顺序排列的实施步骤，每步明确具体改动逻辑与工具。
-4. 风险与破坏性检查 (Risks & Dependencies): 潜在副作用、边界情况或破坏性变更。
-5. 验证与验收指令 (Verification): 具体的验证命令（测试用例、构建命令或检查步骤）。
-6. 约束限制: 方案必须清晰、原子化、可执行，严禁含糊其辞或贴大段未改动的完整代码。`,
+4. 风险点 (Risks & Dependencies):
+   - 潜在副作用、边界情况或破坏性变更（至少标注一条；若确无风险须显式写「无重大风险」而非留空）。
+5. 验证指令 (Verification Commands):
+   - 具体的验证命令（测试用例、构建命令或检查步骤）。
+6. 约束限制:
+   - 方案必须清晰、原子化、可执行，严禁含糊其辞或贴大段未改动的完整代码。
+   - 若只读调研发现方案不可行或信息不足以成方案，必须输出「无法出方案，缺口：xxx」，不得输出半成品方案。`,
     tools: [...PRESET_READ_ONLY],
     loadSkills: false,
     loadExtensions: false,

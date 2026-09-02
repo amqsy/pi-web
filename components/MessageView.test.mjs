@@ -293,3 +293,46 @@ test("shows token estimate badge only while actively streaming", () => {
   }, { isStreaming: false });
   assert.doesNotMatch(completedHtml, /Estimated token count while streaming/);
 });
+
+test("keeps edit tool calls expanded by default while other tools remain collapsed", () => {
+  const editBlock = {
+    type: "toolCall",
+    toolCallId: "call-edit-1",
+    toolName: "edit",
+    input: { path: "src/index.ts" },
+  };
+  const editResult = {
+    role: "toolResult",
+    toolCallId: "call-edit-1",
+    content: [{ type: "text", text: "--- a/src/index.ts\n+++ b/src/index.ts\n@@ -1 +1 @@\n-old\n+new" }],
+  };
+
+  const grepBlock = {
+    type: "toolCall",
+    toolCallId: "call-grep-1",
+    toolName: "grep",
+    input: { path: "src" },
+  };
+  const grepResult = {
+    role: "toolResult",
+    toolCallId: "call-grep-1",
+    content: [{ type: "text", text: "matched line" }],
+  };
+
+  const html = renderMessage({
+    role: "assistant",
+    provider: "google",
+    model: "gemini-3.7-flash",
+    content: [editBlock, grepBlock],
+  }, {
+    toolResults: new Map([
+      ["call-edit-1", editResult],
+      ["call-grep-1", grepResult],
+    ]),
+  });
+
+  // Edit tool diff should be rendered (expanded)
+  assert.match(html, /new/);
+  // Grep tool result text should NOT be rendered (collapsed)
+  assert.doesNotMatch(html, /matched line/);
+});

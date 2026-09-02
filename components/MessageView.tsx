@@ -973,10 +973,17 @@ function isSubagentToolDetails(value: unknown): value is SubagentToolDetails {
 
 function ToolCallBlock({ block, result, duration, onOpenSession }: { block: ToolCallContent; result?: ToolResultMessage; duration?: number; onOpenSession?: (sessionId: string) => void }) {
   const { t } = useI18n();
-  const [expanded, setExpanded] = useState(false);
+  const isEditTool = isEditToolName(block.toolName);
+  const [expanded, setExpanded] = useState(() => isEditTool);
+
+  useEffect(() => {
+    if (isEditTool) {
+      setExpanded(true);
+    }
+  }, [isEditTool]);
+
   const inputStr = getToolCallInputText(block);
   const isStreamingInput = block.rawInput !== undefined;
-  const isEditTool = isEditToolName(block.toolName);
   const resultDiff = result && !result.isError ? getResultDiff(result) : null;
 
   // Result display

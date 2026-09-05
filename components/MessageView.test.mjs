@@ -337,6 +337,26 @@ test("shows token estimate badge only while actively streaming", () => {
   assert.doesNotMatch(completedHtml, /Estimated token count while streaming/);
 });
 
+test("switches from token estimate to official usage statistics when usage is present even if streaming is true", () => {
+  const messageWithUsage = {
+    role: "assistant",
+    provider: "google",
+    model: "gemini-3.7-flash",
+    content: [{ type: "text", text: "Hello world this is a test response." }],
+    usage: {
+      input: 120,
+      output: 45,
+      cacheRead: 0,
+      cacheWrite: 0,
+      cost: { total: 0.001 },
+    },
+  };
+
+  const html = renderMessage(messageWithUsage, { isStreaming: true });
+  assert.doesNotMatch(html, /Estimated token count while streaming/);
+  assert.match(html, /120 in · 45 out/);
+});
+
 test("keeps edit tool calls expanded by default while other tools remain collapsed", () => {
   const editBlock = {
     type: "toolCall",

@@ -619,7 +619,7 @@ function AssistantMessageView({
   blockItemsRef.current = blockItems;
   const tokenEstimateCacheRef = useRef<Map<number, TokenEstimateCacheEntry>>(new Map());
   const estimatedTokens = useMemo(() => {
-    if (!isStreaming) {
+    if (!isStreaming || message.usage) {
       tokenEstimateCacheRef.current = new Map();
       return 0;
     }
@@ -678,7 +678,7 @@ function AssistantMessageView({
   };
 
   useEffect(() => {
-    if (!isStreaming) {
+    if (!isStreaming || message.usage) {
       // Finalise any un-finished thinking block durations on stream end
       const now = new Date().getTime();
       setStreamingDurations((prev: Map<number, number>) => {
@@ -726,7 +726,7 @@ function AssistantMessageView({
     };
     const id = setInterval(tick, 300);
     return () => clearInterval(id);
-  }, [isStreaming]);
+  }, [isStreaming, message.usage]);
 
   if (blocks.length === 0 && !isStreaming && !providerError) return null;
 
@@ -752,7 +752,7 @@ function AssistantMessageView({
         {message.provider && (
           <span>{modelNames?.[`${message.provider}:${message.model}`] ?? modelNames?.[message.model] ?? message.model}</span>
         )}
-        {isStreaming && (() => {
+        {isStreaming && !message.usage && (() => {
           const est = Math.round(estimatedTokens);
           return (
             <>
@@ -814,7 +814,7 @@ function AssistantMessageView({
       <div style={{
         display: "flex", alignItems: "center", gap: 8, marginTop: 4,
       }}>
-        {message.usage && !isStreaming && (
+        {message.usage && (
           <div style={{ fontSize: 11, color: "var(--text-dim)" }}>
             {formatUsage(message.usage)}
           </div>

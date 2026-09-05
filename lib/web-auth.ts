@@ -11,9 +11,10 @@ function secretsEqual(actual: string, expected: string): boolean {
 }
 
 export function isWebPasswordEnabled(
-  password: string | undefined = process.env.PI_WEB_PASSWORD,
+  password?: string,
 ): password is string {
-  return typeof password === "string" && password.length > 0;
+  const resolved = arguments.length > 0 ? password : process.env.PI_WEB_PASSWORD;
+  return typeof resolved === "string" && resolved.length > 0;
 }
 
 export function isValidBasicAuthorization(

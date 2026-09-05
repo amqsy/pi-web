@@ -282,3 +282,100 @@ test("renders custom-message images as buttons that open a larger preview", () =
   assert.match(html, /<button[^>]+aria-label="Preview image"[^>]*>/);
   assert.match(html, /<img[^>]+src="data:image\/png;base64,YWJj"/);
 });
+
+test("auto-expands thinking block when streaming", () => {
+  const html = renderMessage({
+    role: "assistant",
+    provider: "google",
+    model: "gemini-3.7-flash",
+    content: [{ type: "thinking", thinking: "Analyzing the repository structure..." }],
+  }, { isStreaming: true });
+
+  assert.match(html, /Thinking/);
+  assert.match(html, /Analyzing the repository structure\.\.\./);
+});
+
+test("shows thinking placeholder when streaming without text yet", () => {
+  const html = renderMessage({
+    role: "assistant",
+    provider: "google",
+    model: "gemini-3.7-flash",
+    content: [{ type: "thinking", thinking: "" }],
+  }, { isStreaming: true });
+
+  assert.match(html, /Thinking\.\.\./);
+});
+
+test("collapses thinking block by default when loaded completed", () => {
+  const html = renderMessage({
+    role: "assistant",
+    provider: "google",
+    model: "gemini-3.7-flash",
+    content: [{ type: "thinking", thinking: "First summary line.\n\nFinished reasoning about the task." }],
+  }, { isStreaming: false });
+
+  assert.match(html, /aria-expanded="false"/);
+  assert.match(html, /First summary line/);
+  assert.doesNotMatch(html, /Finished reasoning about the task\./);
+});
+
+test("shows token estimate badge only while actively streaming", () => {
+  const streamingHtml = renderMessage({
+    role: "assistant",
+    provider: "google",
+    model: "gemini-3.7-flash",
+    content: [{ type: "text", text: "Hello world this is a test response." }],
+  }, { isStreaming: true });
+  assert.match(streamingHtml, /Estimated token count while streaming/);
+
+  const completedHtml = renderMessage({
+    role: "assistant",
+    provider: "google",
+    model: "gemini-3.7-flash",
+    content: [{ type: "text", text: "Hello world this is a test response." }],
+  }, { isStreaming: false });
+  assert.doesNotMatch(completedHtml, /Estimated token count while streaming/);
+});
+
+test("keeps edit tool calls expanded by default while other tools remain collapsed", () => {
+  const editBlock = {
+    type: "toolCall",
+    toolCallId: "call-edit-1",
+    toolName: "edit",
+    input: { path: "src/index.ts" },
+  };
+  const editResult = {
+    role: "toolResult",
+    toolCallId: "call-edit-1",
+    content: [{ type: "text", text: "--- a/src/index.ts\n+++ b/src/index.ts\n@@ -1 +1 @@\n-old\n+new" }],
+  };
+
+  const grepBlock = {
+    type: "toolCall",
+    toolCallId: "call-grep-1",
+    toolName: "grep",
+    input: { path: "src" },
+  };
+  const grepResult = {
+    role: "toolResult",
+    toolCallId: "call-grep-1",
+    content: [{ type: "text", text: "matched line" }],
+  };
+
+  const html = renderMessage({
+    role: "assistant",
+    provider: "google",
+    model: "gemini-3.7-flash",
+    content: [editBlock, grepBlock],
+  }, {
+    toolResults: new Map([
+      ["call-edit-1", editResult],
+      ["call-grep-1", grepResult],
+    ]),
+  });
+
+  // Edit tool diff should be rendered (expanded)
+  assert.match(html, /new/);
+  // Grep tool result text should NOT be rendered (collapsed)
+  assert.doesNotMatch(html, /matched line/);
+});

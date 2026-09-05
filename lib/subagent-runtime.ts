@@ -185,6 +185,8 @@ export function createSubagentController(
           noPromptTemplates: true,
           noThemes: true,
           noContextFiles: true,
+          // 全局继承阻断：防止底层 SDK 自动加载 ~/.pi/agent/APPEND_SYSTEM.md 导致规则泄漏与污染
+          appendSystemPromptOverride: () => appendSystemPrompt,
           ...(chatOnly
             ? {
                 systemPrompt: " ",

@@ -939,11 +939,13 @@
 
 .settings-theme-options {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
   gap: 3px;
   width: 100%;
   max-width: 420px;
   padding: 3px;
+  border-radius: 7px;
+  background: var(--bg-panel);
 }
 
 .settings-theme-option {

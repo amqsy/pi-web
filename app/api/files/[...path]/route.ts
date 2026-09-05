@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
+import { spawn } from "child_process";
 import {
   getAllowedFileRoots,
   isExistingFilePathAllowed,
@@ -36,7 +37,7 @@ const IGNORED_NAMES = new Set([
 
 const IGNORED_SUFFIXES = [".pyc"];
 
-const FILE_REQUEST_TYPES = ["list", "read", "download", "meta", "preview", "watch"] as const;
+const FILE_REQUEST_TYPES = ["list", "read", "download", "meta", "preview", "watch", "reveal"] as const;
 type FileRequestType = typeof FILE_REQUEST_TYPES[number];
 const FILE_REQUEST_TYPE_SET = new Set<string>(FILE_REQUEST_TYPES);
 const MAX_UPLOAD_FILE_BYTES = 25 * 1024 * 1024;
@@ -231,6 +232,111 @@ export async function POST(
     );
   } catch (error) {
     return NextResponse.json({ error: error instanceof Error ? error.message : String(error) }, { status: 500 });
+  }
+}
+
+function revealFileInExplorer(filePath: string): string | null {
+  try {
+    const target = fs.realpathSync(filePath);
+    if (process.platform === "win32") {
+      // Avoid `explorer.exe /select,<path>`: explorer parses its own command line
+      // and truncates at the first comma, so paths containing "," open the wrong
+      // folder. SHOpenFolderAndSelectItems takes the path as data instead.
+      // Explorer may also reuse an existing window without raising it, so the
+      // same script then focuses the matching folder window.
+      const encodedTarget = Buffer.from(target, "utf16le").toString("base64");
+      const encodedFolder = Buffer.from(path.dirname(target), "utf16le").toString("base64");
+      const revealScript = `
+$target = [Text.Encoding]::Unicode.GetString([Convert]::FromBase64String('${encodedTarget}'))
+$folder = [Text.Encoding]::Unicode.GetString([Convert]::FromBase64String('${encodedFolder}'))
+Add-Type @'
+using System;
+using System.Runtime.InteropServices;
+public static class PiWebReveal {
+  [DllImport("shell32.dll", SetLastError = true)] public static extern int SHParseDisplayName([MarshalAs(UnmanagedType.LPWStr)] string name, IntPtr bindingContext, out IntPtr pidl, uint sfgaoIn, out uint sfgaoOut);
+  [DllImport("shell32.dll", SetLastError = true)] public static extern int SHOpenFolderAndSelectItems(IntPtr pidlFolder, uint cidl, [In, MarshalAs(UnmanagedType.LPArray)] IntPtr[] apidl, uint dwFlags);
+  [DllImport("shell32.dll")] public static extern void ILFree(IntPtr pidl);
+  [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr hWnd);
+  [DllImport("user32.dll")] public static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);
+  [DllImport("user32.dll")] public static extern bool BringWindowToTop(IntPtr hWnd);
+  [DllImport("user32.dll")] public static extern IntPtr SetActiveWindow(IntPtr hWnd);
+  [DllImport("user32.dll")] public static extern IntPtr SetFocus(IntPtr hWnd);
+  [DllImport("user32.dll")] public static extern IntPtr GetForegroundWindow();
+  [DllImport("user32.dll")] public static extern uint GetWindowThreadProcessId(IntPtr hWnd, IntPtr processId);
+  [DllImport("kernel32.dll")] public static extern uint GetCurrentThreadId();
+  [DllImport("user32.dll")] public static extern bool AttachThreadInput(uint idAttach, uint idAttachTo, bool attach);
+  public static int Reveal(string itemPath) {
+    IntPtr pidl; uint sfgao;
+    int hr = SHParseDisplayName(itemPath, IntPtr.Zero, out pidl, 0, out sfgao);
+    if (hr != 0) { return hr; }
+    try { return SHOpenFolderAndSelectItems(pidl, 0, null, 0); }
+    finally { ILFree(pidl); }
+  }
+}
+'@
+[PiWebReveal]::Reveal($target) | Out-Null
+$shell = New-Object -ComObject Shell.Application
+for ($attempt = 0; $attempt -lt 20; $attempt++) {
+  foreach ($window in $shell.Windows()) {
+    try {
+      if ([string]::Equals($window.Document.Folder.Self.Path, $folder, [StringComparison]::OrdinalIgnoreCase)) {
+        $hwnd = [IntPtr]$window.HWND
+        [PiWebReveal]::ShowWindowAsync($hwnd, 9) | Out-Null
+        [PiWebReveal]::BringWindowToTop($hwnd) | Out-Null
+        $foreground = [PiWebReveal]::GetForegroundWindow()
+        $foregroundThread = [PiWebReveal]::GetWindowThreadProcessId($foreground, [IntPtr]::Zero)
+        $currentThread = [PiWebReveal]::GetCurrentThreadId()
+        $attached = $false
+        try {
+          if ($foregroundThread -and $foregroundThread -ne $currentThread) {
+            $attached = [PiWebReveal]::AttachThreadInput($currentThread, $foregroundThread, $true)
+          }
+          [PiWebReveal]::SetActiveWindow($hwnd) | Out-Null
+          [PiWebReveal]::SetFocus($hwnd) | Out-Null
+          [PiWebReveal]::SetForegroundWindow($hwnd) | Out-Null
+        } finally {
+          if ($attached) {
+            [PiWebReveal]::AttachThreadInput($currentThread, $foregroundThread, $false) | Out-Null
+          }
+        }
+        try {
+          $app = New-Object -ComObject WScript.Shell
+          $app.AppActivate([int]$window.HWND) | Out-Null
+        } catch { }
+        exit 0
+      }
+    } catch { }
+  }
+  Start-Sleep -Milliseconds 250
+}
+`;
+      // `detached: true` passes DETACHED_PROCESS on Windows, which starts
+      // powershell.exe without a console; it then exits 0 without running the
+      // script. Stay attached and rely on windowsHide plus ignored stdio.
+      const child = spawn("powershell.exe", [
+        "-NoProfile",
+        "-NonInteractive",
+        "-STA",
+        "-WindowStyle",
+        "Hidden",
+        "-EncodedCommand",
+        Buffer.from(revealScript, "utf16le").toString("base64"),
+      ], { stdio: "ignore", windowsHide: true });
+      child.on("error", () => {});
+      child.unref();
+    } else if (process.platform === "darwin") {
+      const child = spawn("open", ["-R", target], { detached: true, stdio: "ignore" });
+      child.on("error", () => {});
+      child.unref();
+    } else {
+      // No portable "reveal file" protocol on Linux; open the containing directory.
+      const child = spawn("xdg-open", [path.dirname(target)], { detached: true, stdio: "ignore" });
+      child.on("error", () => {});
+      child.unref();
+    }
+    return null;
+  } catch (error) {
+    return error instanceof Error ? error.message : String(error);
   }
 }
 
@@ -493,6 +599,17 @@ export async function GET(
       }
       const mime = getImageMime(filePath) || getAudioMime(filePath) || getVideoMime(filePath) || getDocumentMime(filePath) || "application/octet-stream";
       return streamFile(filePath, stat, mime, request.headers.get("range"), true);
+    }
+
+    if (type === "reveal") {
+      if (!stat?.isFile()) {
+        return NextResponse.json({ error: "Not a file" }, { status: 400 });
+      }
+      const error = revealFileInExplorer(filePath);
+      if (error) {
+        return NextResponse.json({ error }, { status: 500 });
+      }
+      return NextResponse.json({ ok: true });
     }
 
     if (type === "meta") {

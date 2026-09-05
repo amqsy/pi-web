@@ -66,3 +66,15 @@ test("lightweight source rows are skipped for highlighted, diff, and preview vie
   }
   assert.equal(render(large, "source", false, false, true)[0].props.children[1].props.style.whiteSpace, "pre-wrap");
 });
+
+test("FileViewer provides OpenInExplorerButton alongside DownloadLink in all five viewers", () => {
+  assert.match(source, /function OpenInExplorerButton/);
+  assert.match(source, /getFileApiUrl\(filePath, "reveal", sourceSessionId\)/);
+  assert.match(source, /i18n\.openInExplorer/);
+  assert.match(source, /i18n\.openedInExplorer/);
+  assert.match(source, /i18n\.openInExplorerFailed/);
+
+  const matches = [...source.matchAll(/<OpenInExplorerButton filePath=\{filePath\} sourceSessionId=\{sourceSessionId\} \/>/g)];
+  assert.equal(matches.length, 5, "OpenInExplorerButton should appear in all 5 viewer implementations (image, audio, video, document, text)");
+});
+

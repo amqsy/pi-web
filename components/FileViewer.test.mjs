@@ -20,3 +20,15 @@ test("large source previews bypass the per-line syntax highlighter", () => {
   assert.match(lightweightSource, /className="file-source-line-content"/);
   assert.match(lightweightSource, /style=\{FILE_LINE_NUMBER_STYLE\}/);
 });
+
+test("FileViewer provides OpenInExplorerButton alongside DownloadLink in all four viewers", () => {
+  assert.match(source, /function OpenInExplorerButton/);
+  assert.match(source, /getFileApiUrl\(filePath, "reveal", sourceSessionId\)/);
+  assert.match(source, /i18n\.openInExplorer/);
+  assert.match(source, /i18n\.openedInExplorer/);
+  assert.match(source, /i18n\.openInExplorerFailed/);
+
+  const matches = [...source.matchAll(/<OpenInExplorerButton filePath=\{filePath\} sourceSessionId=\{sourceSessionId\} \/>/g)];
+  assert.equal(matches.length, 4, "OpenInExplorerButton should appear in all 4 viewer implementations");
+});
+

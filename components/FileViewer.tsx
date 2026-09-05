@@ -207,7 +207,7 @@ function SourceCodeRenderer({ rows, stylesheet, useInlineStyles, wrapLines }: So
 
 function getFileApiUrl(
   filePath: string,
-  type: "read" | "download" | "meta" | "preview" | "watch",
+  type: "read" | "download" | "meta" | "preview" | "watch" | "reveal",
   sourceSessionId?: string | null,
   params: Record<string, string | number | undefined> = {},
 ): string {
@@ -236,6 +236,72 @@ function DownloadLink({ filePath, sourceSessionId }: { filePath: string; sourceS
         <line x1="12" y1="15" x2="12" y2="3" />
       </svg>
     </a>
+  );
+}
+
+function OpenInExplorerButton({ filePath, sourceSessionId }: { filePath: string; sourceSessionId?: string | null }) {
+  const { t } = useI18n();
+  const [status, setStatus] = useState<"idle" | "opening" | "opened" | "error">("idle");
+  const resetTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => () => {
+    if (resetTimer.current) clearTimeout(resetTimer.current);
+  }, []);
+
+  const handleClick = useCallback(async () => {
+    if (status === "opening") return;
+    setStatus("opening");
+    try {
+      const response = await fetch(getFileApiUrl(filePath, "reveal", sourceSessionId));
+      setStatus(response.ok ? "opened" : "error");
+    } catch {
+      setStatus("error");
+    }
+    resetTimer.current = setTimeout(() => setStatus("idle"), 1800);
+  }, [filePath, sourceSessionId, status]);
+
+  const title =
+    status === "opened"
+      ? t("i18n.openedInExplorer")
+      : status === "error"
+        ? t("i18n.openInExplorerFailed")
+        : t("i18n.openInExplorer");
+
+  return (
+    <button
+      type="button"
+      onClick={handleClick}
+      title={title}
+      aria-label={t("i18n.openInExplorer")}
+      aria-disabled={status === "opening"}
+      className="file-viewer-icon-button"
+      style={
+        status === "opened"
+          ? { background: "var(--bg-selected)", color: "var(--text)" }
+          : status === "error"
+            ? { color: "#f87171" }
+            : undefined
+      }
+    >
+      {status === "opening" ? (
+        <span
+          style={{
+            width: 12,
+            height: 12,
+            border: "2px solid currentColor",
+            borderTopColor: "transparent",
+            borderRadius: "50%",
+            display: "inline-block",
+            animation: "spin 0.7s linear infinite",
+          }}
+        />
+      ) : (
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
+          <path d="M2 10h20" />
+        </svg>
+      )}
+    </button>
   );
 }
 
@@ -546,6 +612,7 @@ function ImageViewer({ filePath, cwd, sourceSessionId, watchEnabled = true }: Pr
           {watching ? "live" : "static"}
         </span>
         <DownloadLink filePath={filePath} sourceSessionId={sourceSessionId} />
+        <OpenInExplorerButton filePath={filePath} sourceSessionId={sourceSessionId} />
       </div>
       <div
         style={{
@@ -716,6 +783,7 @@ function AudioViewer({ filePath, cwd, sourceSessionId, watchEnabled = true }: Pr
           {watching ? "live" : "static"}
         </span>
         <DownloadLink filePath={filePath} sourceSessionId={sourceSessionId} />
+        <OpenInExplorerButton filePath={filePath} sourceSessionId={sourceSessionId} />
       </div>
       <div
         style={{
@@ -884,6 +952,7 @@ function DocumentViewer({ filePath, cwd, sourceSessionId, watchEnabled = true }:
         <span style={{ marginLeft: "auto" }}>{ext === "docx" ? "docx preview" : "pdf"}</span>
         {size != null && <span>{formatSize(size)}</span>}
         <DownloadLink filePath={filePath} sourceSessionId={sourceSessionId} />
+        <OpenInExplorerButton filePath={filePath} sourceSessionId={sourceSessionId} />
         <span
           title={watching ? t("i18n.liveSync") : t("i18n.notWatching")}
           style={{ display: "flex", alignItems: "center", gap: 4, color: watching ? "#4ade80" : "var(--text-dim)", flexShrink: 0 }}
@@ -1414,7 +1483,12 @@ function TextFileViewer({
             )}
           </div>
 
-          {!isDeletedDiff && <DownloadLink filePath={filePath} sourceSessionId={sourceSessionId} />}
+          {!isDeletedDiff && (
+            <>
+              <DownloadLink filePath={filePath} sourceSessionId={sourceSessionId} />
+              <OpenInExplorerButton filePath={filePath} sourceSessionId={sourceSessionId} />
+            </>
+          )}
         </div>
       </div>
 

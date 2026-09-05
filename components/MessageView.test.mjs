@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { createJiti } from "jiti";
 
@@ -17,6 +18,7 @@ const {
 } = await jiti.import("./MessageView.tsx");
 const { I18nProvider } = await jiti.import("@/hooks/useI18n");
 const { splitFinalAssistantBlocks } = await jiti.import("@/lib/message-display");
+const { THINKING_EXPANDED_EVENT } = await jiti.import("@/lib/thinking-expansion-preference");
 
 function renderMessage(message, props = {}) {
   return renderToStaticMarkup(
@@ -398,4 +400,209 @@ test("keeps edit tool calls expanded by default while other tools remain collaps
   assert.match(html, /new/);
   // Grep tool result text should NOT be rendered (collapsed)
   assert.doesNotMatch(html, /matched line/);
+});
+
+function createThinkingBlockHarness() {
+  let hookIndex = 0;
+  const hooks = [];
+  const prevDeps = [];
+  const cleanups = [];
+  const pendingEffects = [];
+  let currentProps = null;
+  let latestOutput = null;
+  let isRendering = false;
+  let needsRerender = false;
+
+  const dispatcher = {
+    useState(initial) {
+      const i = hookIndex++;
+      if (hooks[i] === undefined) {
+        hooks[i] = typeof initial === "function" ? initial() : initial;
+      }
+      const setState = (val) => {
+        const next = typeof val === "function" ? val(hooks[i]) : val;
+        if (hooks[i] !== next) {
+          hooks[i] = next;
+          if (isRendering) {
+            needsRerender = true;
+          } else {
+            renderCycle();
+          }
+        }
+      };
+      return [hooks[i], setState];
+    },
+    useRef(initial) {
+      const i = hookIndex++;
+      if (hooks[i] === undefined) {
+        hooks[i] = { current: initial };
+      }
+      return hooks[i];
+    },
+    useEffect(effect, deps) {
+      const i = hookIndex++;
+      const oldDeps = prevDeps[i];
+      let hasChanged = true;
+      if (oldDeps && deps) {
+        hasChanged = deps.some((d, idx) => !Object.is(d, oldDeps[idx]));
+      }
+      if (hasChanged) {
+        prevDeps[i] = deps;
+        pendingEffects.push({ index: i, effect });
+      }
+    },
+    useContext() {
+      return { t: (k) => k };
+    },
+    useMemo(fn) {
+      return fn();
+    },
+    useCallback(fn) {
+      return fn;
+    },
+  };
+
+  function renderCycle() {
+    let passes = 0;
+    do {
+      needsRerender = false;
+      isRendering = true;
+      hookIndex = 0;
+      const prevDispatcher = React.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE.H;
+      React.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE.H = dispatcher;
+      try {
+        latestOutput = ThinkingBlock(currentProps);
+      } finally {
+        React.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE.H = prevDispatcher;
+        isRendering = false;
+      }
+
+      const effectsToRun = pendingEffects.splice(0, pendingEffects.length);
+      for (const { index, effect } of effectsToRun) {
+        cleanups[index]?.();
+        cleanups[index] = effect();
+      }
+      passes++;
+    } while (needsRerender && passes < 10);
+    return latestOutput;
+  }
+
+  return {
+    mount(props) {
+      currentProps = props;
+      return renderCycle();
+    },
+    update(props) {
+      currentProps = props;
+      return renderCycle();
+    },
+    getExpanded: () => Boolean(latestOutput.props.children[0].props["aria-expanded"]),
+    toggle: () => {
+      latestOutput.props.children[0].props.onClick();
+    },
+    getUserInteracted: () => hooks[4]?.current,
+    unmount: () => {
+      for (const cleanup of cleanups) cleanup?.();
+    },
+  };
+}
+
+test("auto-collapses thinking block when streaming completes if user has not interacted", () => {
+  const previousWindow = globalThis.window;
+  try {
+    let preference = "false";
+    const listeners = new Map();
+    globalThis.window = {
+      localStorage: {
+        getItem: () => preference,
+        setItem: (_, val) => { preference = String(val); },
+        removeItem: () => {},
+      },
+      addEventListener: (type, handler) => {
+        if (!listeners.has(type)) listeners.set(type, new Set());
+        listeners.get(type).add(handler);
+      },
+      removeEventListener: (type, handler) => {
+        listeners.get(type)?.delete(handler);
+      },
+      dispatchEvent: (event) => {
+        for (const handler of listeners.get(event.type) || []) handler(event);
+        return true;
+      },
+    };
+
+    // 1. When streaming, thinking block is auto-expanded
+    const harness = createThinkingBlockHarness();
+    harness.mount({
+      block: { type: "thinking", thinking: "Deep reasoning step 1\nDeep reasoning step 2" },
+      blockIndex: 0,
+      isStreaming: true,
+    });
+    assert.equal(harness.getExpanded(), true, "Thinking block should be expanded while streaming");
+
+    // 2. When streaming completes without user interaction, it automatically collapses
+    harness.update({
+      block: { type: "thinking", thinking: "Deep reasoning step 1\nDeep reasoning step 2" },
+      blockIndex: 0,
+      isStreaming: false,
+    });
+    assert.equal(harness.getExpanded(), false, "Thinking block should auto-collapse when streaming finishes without manual intervention");
+
+    // 3. User manually interacts during streaming
+    const interactiveHarness = createThinkingBlockHarness();
+    interactiveHarness.mount({
+      block: { type: "thinking", thinking: "Deep reasoning step 1\nDeep reasoning step 2" },
+      blockIndex: 0,
+      isStreaming: true,
+    });
+    assert.equal(interactiveHarness.getExpanded(), true);
+
+    // User toggles to collapse, then toggles to expand
+    interactiveHarness.toggle(); // user collapsed it
+    assert.equal(interactiveHarness.getExpanded(), false);
+    interactiveHarness.toggle(); // user re-expanded it
+    assert.equal(interactiveHarness.getExpanded(), true);
+
+    // Streaming completes - should preserve user's manual choice (remains expanded)
+    interactiveHarness.update({
+      block: { type: "thinking", thinking: "Deep reasoning step 1\nDeep reasoning step 2" },
+      blockIndex: 0,
+      isStreaming: false,
+    });
+    assert.equal(interactiveHarness.getExpanded(), true, "Should keep manual user toggle state when streaming finishes");
+
+    // 4. Preference event resets manual intervention and updates state
+    preference = "false";
+    globalThis.window.dispatchEvent({ type: THINKING_EXPANDED_EVENT });
+    assert.equal(interactiveHarness.getExpanded(), false, "Should update to default preference on THINKING_EXPANDED_EVENT");
+  } finally {
+    if (previousWindow === undefined) delete globalThis.window;
+    else globalThis.window = previousWindow;
+  }
+});
+
+test("thinking block implementation contract for auto-collapse on stream completion", async () => {
+  const source = await readFile(new URL("./MessageView.tsx", import.meta.url), "utf8");
+  const thinkingBlockStart = source.indexOf("export function ThinkingBlock");
+  const thinkingBlockEnd = source.indexOf("function isSubagentToolDetails", thinkingBlockStart);
+  const thinkingBlockSource = source.slice(thinkingBlockStart, thinkingBlockEnd);
+
+  // userInteractedRef tracks manual user interaction
+  assert.match(thinkingBlockSource, /const userInteractedRef = useRef\(false\);/);
+
+  // toggle marks userInteractedRef.current = true
+  assert.match(thinkingBlockSource, /const toggle = \(\) => \{\s*userInteractedRef\.current = true;\s*setExpanded\(\(v\) => !v\);/);
+  assert.match(thinkingBlockSource, /onClick=\{toggle\}/);
+
+  // useEffect on isStreaming auto-expands and auto-collapses
+  assert.match(
+    thinkingBlockSource,
+    /useEffect\(\(\) => \{\s*if \(isStreaming === true\) \{\s*userInteractedRef\.current = false;\s*setExpanded\(true\);\s*\} else if \(isStreaming === false\) \{\s*if \(!userInteractedRef\.current\) \{\s*setExpanded\(isThinkingExpandedByDefault\(\)\);\s*\}\s*\}\s*\}, \[isStreaming\]\);/,
+  );
+
+  // THINKING_EXPANDED_EVENT resets userInteractedRef.current and updates state
+  assert.match(
+    thinkingBlockSource,
+    /const onChange = \(\) => \{\s*userInteractedRef\.current = false;\s*setExpanded\(Boolean\(isStreaming \|\| isThinkingExpandedByDefault\(\)\)\);\s*\};/,
+  );
 });

@@ -893,20 +893,34 @@ export function ThinkingBlock({ block, duration, sessionId, entryId, blockIndex,
   const [content, setContent] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const userInteractedRef = useRef(false);
   const tRef = useRef(t);
   tRef.current = t;
   const preview = getThinkingPreview(block.thinking);
 
+  const toggle = () => {
+    userInteractedRef.current = true;
+    setExpanded((v) => !v);
+  };
+
   // Keep already-mounted blocks in sync when the preference changes.
   useEffect(() => {
-    const onChange = () => setExpanded(Boolean(isStreaming || isThinkingExpandedByDefault()));
+    const onChange = () => {
+      userInteractedRef.current = false;
+      setExpanded(Boolean(isStreaming || isThinkingExpandedByDefault()));
+    };
     window.addEventListener(THINKING_EXPANDED_EVENT, onChange);
     return () => window.removeEventListener(THINKING_EXPANDED_EVENT, onChange);
   }, [isStreaming]);
 
   useEffect(() => {
-    if (isStreaming) {
+    if (isStreaming === true) {
+      userInteractedRef.current = false;
       setExpanded(true);
+    } else if (isStreaming === false) {
+      if (!userInteractedRef.current) {
+        setExpanded(isThinkingExpandedByDefault());
+      }
     }
   }, [isStreaming]);
 
@@ -957,7 +971,7 @@ export function ThinkingBlock({ block, duration, sessionId, entryId, blockIndex,
         aria-expanded={expanded}
         aria-label={`${t("i18n.thinking")}${preview ? `: ${preview}` : ""}`}
         title={t("i18n.thinking")}
-        onClick={() => setExpanded((v) => !v)}
+        onClick={toggle}
         style={{
           display: "inline-flex",
           alignItems: "center",

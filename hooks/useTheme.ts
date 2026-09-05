@@ -2,8 +2,10 @@
 
 import { useCallback, useSyncExternalStore } from "react";
 
-export type ThemePreference = "light" | "dark" | "auto";
+export type ThemePreference = "light" | "dark" | "auto" | "macchiato";
 export type ResolvedTheme = "light" | "dark";
+
+const CATPPUCCIN_PREFERENCES = ["macchiato"] as const;
 
 type ThemeState = {
   preference: ThemePreference;
@@ -13,7 +15,7 @@ type ThemeState = {
 type ToggleOrigin = { x: number; y: number };
 
 const STORAGE_KEY = "pi-theme";
-const PREFERENCE_CYCLE: ThemePreference[] = ["light", "dark", "auto"];
+const PREFERENCE_CYCLE: ThemePreference[] = ["light", "dark", "auto", "macchiato"];
 const SERVER_SNAPSHOT: ThemeState = { preference: "auto", theme: "light" };
 
 const listeners = new Set<() => void>();
@@ -32,7 +34,10 @@ function getSystemTheme(): ResolvedTheme {
 function readStoredPreference(): ThemePreference {
   try {
     const value = localStorage.getItem(STORAGE_KEY);
-    if (value === "light" || value === "dark" || value === "auto") return value;
+    if (
+      value === "light" || value === "dark" || value === "auto" ||
+      (value !== null && (CATPPUCCIN_PREFERENCES as readonly string[]).includes(value))
+    ) return value as ThemePreference;
   } catch {
     // ignore storage errors (private mode, quota, etc.)
   }
@@ -40,12 +45,17 @@ function readStoredPreference(): ThemePreference {
 }
 
 function resolveTheme(preference: ThemePreference): ResolvedTheme {
-  return preference === "auto" ? getSystemTheme() : preference;
+  if (preference === "auto") return getSystemTheme();
+  return preference === "dark" || preference === "macchiato"
+    ? "dark"
+    : "light";
 }
 
-function applyDomTheme(theme: ResolvedTheme): void {
+function applyDomTheme(theme: ResolvedTheme, preference?: ThemePreference): void {
   if (typeof document === "undefined") return;
-  document.documentElement.classList.toggle("dark", theme === "dark");
+  const root = document.documentElement;
+  root.classList.toggle("dark", theme === "dark");
+  for (const flavor of CATPPUCCIN_PREFERENCES) root.classList.toggle(`catppuccin-${flavor}`, preference === flavor);
 }
 
 function ensureState(): ThemeState {
@@ -54,13 +64,13 @@ function ensureState(): ThemeState {
 
   const preference = readStoredPreference();
   const theme = resolveTheme(preference);
-  applyDomTheme(theme);
+  applyDomTheme(theme, preference);
   state = { preference, theme };
   return state;
 }
 
 function setThemeState(preference: ThemePreference, theme: ResolvedTheme, persist: boolean): void {
-  applyDomTheme(theme);
+  applyDomTheme(theme, preference);
   if (persist) {
     try {
       localStorage.setItem(STORAGE_KEY, preference);

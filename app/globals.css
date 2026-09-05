@@ -52,6 +52,24 @@ html.dark {
   --bg-subtle: rgba(255,255,255,0.04);
 }
 
+/* Catppuccin Macchiato: https://catppuccin.com/palette/ */
+html.catppuccin-macchiato {
+  --bg: #24273a;
+  --bg-panel: #1e2030;
+  --bg-hover: #363a4f;
+  --bg-selected: #494d64;
+  --border: #5b6078;
+  --text: #cad3f5;
+  --text-muted: #b8c0e0;
+  --text-dim: #8087a2;
+  --accent: #8aadf4;
+  --accent-hover: #b7bdf8;
+  --user-bg: #363a4f;
+  --assistant-bg: #24273a;
+  --tool-bg: #1e2030;
+  --bg-subtle: rgba(202, 211, 245, 0.06);
+}
+
 /* WebKit reports dvh/innerHeight without the status-bar strip for installed
    home-screen apps even though the layout still starts at the screen's top.
    In standalone mode there is no browser toolbar to make vh unstable, and vh

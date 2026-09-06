@@ -339,7 +339,7 @@ test("shows token estimate badge only while actively streaming", () => {
   assert.doesNotMatch(completedHtml, /Estimated token count while streaming/);
 });
 
-test("switches from token estimate to official usage statistics when usage is present even if streaming is true", () => {
+test("shows token estimate badge during streaming even when usage object is initialized, and switches to official usage upon completion", () => {
   const messageWithUsage = {
     role: "assistant",
     provider: "google",
@@ -354,9 +354,31 @@ test("switches from token estimate to official usage statistics when usage is pr
     },
   };
 
-  const html = renderMessage(messageWithUsage, { isStreaming: true });
-  assert.doesNotMatch(html, /Estimated token count while streaming/);
-  assert.match(html, /120 in · 45 out/);
+  const streamingHtml = renderMessage(messageWithUsage, { isStreaming: true });
+  assert.match(streamingHtml, /Estimated token count while streaming/);
+  assert.doesNotMatch(streamingHtml, /120 in · 45 out/);
+
+  const completedHtml = renderMessage(messageWithUsage, { isStreaming: false });
+  assert.doesNotMatch(completedHtml, /Estimated token count while streaming/);
+  assert.match(completedHtml, /120 in · 45 out/);
+});
+
+test("shows token estimate badge while model is thinking during streaming", () => {
+  const thinkingMessage = {
+    role: "assistant",
+    provider: "anthropic",
+    model: "claude-3-7-sonnet",
+    content: [{ type: "thinking", thinking: "Let me think about how to solve this problem carefully..." }],
+    usage: {
+      input: 80,
+      output: 0,
+      cacheRead: 0,
+      cacheWrite: 0,
+    },
+  };
+
+  const html = renderMessage(thinkingMessage, { isStreaming: true });
+  assert.match(html, /Estimated token count while streaming/);
 });
 
 test("keeps edit tool calls expanded by default while other tools remain collapsed", () => {

@@ -1,0 +1,424 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - link "X" [ref=e4] [cursor=pointer]:
+      - /url: /
+  - main [ref=e7]:
+    - generic [ref=e8]:
+      - button "Back" [ref=e9] [cursor=pointer]
+      - generic [ref=e12]:
+        - generic [ref=e14]:
+          - generic [ref=e15]: Elon Musk
+          - generic [ref=e18]:
+            - button "Verified account" [ref=e19] [cursor=pointer]
+            - link "X" [ref=e22] [cursor=pointer]:
+              - /url: https://twitter.com/X
+              - img "X" [ref=e25]
+        - generic [ref=e26]: 108.2K posts
+      - button "Grok" [ref=e27] [cursor=pointer]
+      - button "Search" [ref=e30] [cursor=pointer]
+    - link "Opens header photo" [ref=e34] [cursor=pointer]:
+      - /url: /elonmusk/header_photo
+      - img "Elon Musk profile banner" [ref=e35]
+    - generic [ref=e36]:
+      - generic [ref=e37]:
+        - generic [ref=e38]:
+          - link "Opens profile photo" [ref=e40] [cursor=pointer]:
+            - /url: /elonmusk/photo
+            - img "@elonmusk" [ref=e42]
+          - generic [ref=e43]:
+            - generic [ref=e44]:
+              - heading "Elon Musk" [level=1] [ref=e45]
+              - generic [ref=e48]:
+                - button "Verified account" [ref=e49] [cursor=pointer]
+                - link "X" [ref=e52] [cursor=pointer]:
+                  - /url: https://twitter.com/X
+                  - img "X" [ref=e55]
+            - generic [ref=e56]: "@elonmusk"
+        - link "Terafab.AI" [ref=e59] [cursor=pointer]:
+          - /url: http://Terafab.AI
+        - link "Joined 2009年6月" [ref=e64] [cursor=pointer]:
+          - /url: /elonmusk/about
+        - generic [ref=e65]:
+          - link "1,403 Following" [ref=e66] [cursor=pointer]:
+            - /url: /elonmusk/following
+            - generic [ref=e67]:
+              - generic [ref=e68]: 1,403
+              - generic [ref=e69]: Following
+          - link "2.4亿 Followers" [ref=e70] [cursor=pointer]:
+            - /url: /elonmusk/verified_followers
+            - generic [ref=e71]:
+              - generic [ref=e72]: 2.4亿
+              - generic [ref=e73]: Followers
+          - link "249 Subscriptions" [ref=e74] [cursor=pointer]:
+            - /url: /elonmusk/creator-subscriptions/subscriptions
+            - generic [ref=e75]:
+              - generic [ref=e76]: "249"
+              - generic [ref=e77]: Subscriptions
+      - generic [ref=e78]:
+        - generic [ref=e79]:
+          - button "Mention" [ref=e81] [cursor=pointer]
+          - link "Mention" [ref=e83] [cursor=pointer]:
+            - /url: /compose/post?text=%40elonmusk+
+        - generic [ref=e85]:
+          - button "Follow" [ref=e87] [cursor=pointer]
+          - link "Follow" [ref=e89] [cursor=pointer]:
+            - /url: /elonmusk
+      - tablist [ref=e92]:
+        - tab "Posts" [selected] [ref=e93] [cursor=pointer]
+        - tab "Replies" [ref=e103] [cursor=pointer]
+        - tab "Reposts" [ref=e107] [cursor=pointer]
+        - tab "Media" [ref=e111] [cursor=pointer]
+    - generic [ref=e117]:
+      - list [ref=e118]:
+        - listitem [ref=e119]:
+          - link [ref=e121] [cursor=pointer]:
+            - article [ref=e122]:
+              - generic [ref=e123]: 已置顶
+              - generic [ref=e128]:
+                - link [ref=e131]:
+                  - /url: /elonmusk
+                  - img "@elonmusk" [ref=e133]
+                - generic [ref=e134]:
+                  - generic [ref=e135]:
+                    - generic [ref=e136]:
+                      - generic [ref=e137]:
+                        - generic [ref=e139]:
+                          - generic [ref=e140]:
+                            - link "Elon Musk" [ref=e141]:
+                              - /url: https://x.com/elonmusk
+                            - generic [ref=e144]:
+                              - button "Verified account" [ref=e145]
+                              - link "X" [ref=e148]:
+                                - /url: https://twitter.com/X
+                                - img "X" [ref=e151]
+                          - link "@elonmusk" [ref=e153]:
+                            - /url: https://x.com/elonmusk
+                        - generic [ref=e154]:
+                          - text: ·
+                          - link "9月3日" [ref=e155]:
+                            - /url: /elonmusk/status/2095364595326263447
+                      - button "More" [ref=e157]
+                    - generic [ref=e161]: A Storm of Cybercabs
+                  - generic [ref=e162]:
+                    - link "Reply" [ref=e164]:
+                      - /url: /i/status/2095364595326263447
+                      - generic [ref=e165]: "5739"
+                    - button "Repost" [ref=e172]:
+                      - generic [ref=e173]: "5278"
+                    - button "Like" [ref=e180]:
+                      - generic [ref=e181]: 6万
+                    - button "View count" [ref=e188]:
+                      - generic [ref=e189]: 1164万
+                    - generic [ref=e195]:
+                      - button "Bookmark" [ref=e197]
+                      - button "Share" [ref=e201]
+        - listitem [ref=e205]:
+          - link [ref=e207] [cursor=pointer]:
+            - article [ref=e208]:
+              - generic [ref=e209]:
+                - link [ref=e212]:
+                  - /url: /elonmusk
+                  - img "@elonmusk" [ref=e214]
+                - generic [ref=e215]:
+                  - generic [ref=e216]:
+                    - generic [ref=e217]:
+                      - generic [ref=e218]:
+                        - generic [ref=e220]:
+                          - generic [ref=e221]:
+                            - link "Elon Musk" [ref=e222]:
+                              - /url: https://x.com/elonmusk
+                            - generic [ref=e225]:
+                              - button "Verified account" [ref=e226]
+                              - link "X" [ref=e229]:
+                                - /url: https://twitter.com/X
+                                - img "X" [ref=e232]
+                          - link "@elonmusk" [ref=e234]:
+                            - /url: https://x.com/elonmusk
+                        - generic [ref=e235]:
+                          - text: ·
+                          - link "1h" [ref=e236]:
+                            - /url: /elonmusk/status/2096332306847875580
+                      - button "More" [ref=e238]
+                    - generic [ref=e242]:
+                      - text: Grok
+                      - link "@bot" [ref=e243]:
+                        - /url: https://x.com/bot
+                      - text: usage limits reset
+                  - link [ref=e246]:
+                    - article [ref=e247]:
+                      - generic [ref=e249]:
+                        - generic [ref=e250]:
+                          - link [ref=e251]:
+                            - /url: /bot
+                            - img "@bot" [ref=e253]
+                          - generic [ref=e254]:
+                            - generic [ref=e256]:
+                              - generic [ref=e257]:
+                                - link "Grok Bot" [ref=e258]:
+                                  - /url: https://x.com/bot
+                                - generic [ref=e261]:
+                                  - button "Verified account" [ref=e262]
+                                  - link "SpaceXAI" [ref=e268]:
+                                    - /url: https://twitter.com/SpaceXAI
+                                    - img "SpaceXAI" [ref=e271]
+                              - link "@bot" [ref=e273]:
+                                - /url: https://x.com/bot
+                            - generic [ref=e274]:
+                              - text: ·
+                              - link "3h" [ref=e275]:
+                                - /url: /bot/status/2096303514230423629
+                        - generic [ref=e276]: We've reset usage limits for all Grok Bot users. Enjoy!
+                  - generic [ref=e277]:
+                    - link "Reply" [ref=e279]:
+                      - /url: /i/status/2096332306847875580
+                      - generic [ref=e280]: "817"
+                    - button "Repost" [ref=e287]:
+                      - generic [ref=e288]: "419"
+                    - button "Like" [ref=e295]:
+                      - generic [ref=e296]: "3878"
+                    - button "View count" [ref=e303]:
+                      - generic [ref=e304]: 81万
+                    - generic [ref=e310]:
+                      - button "Bookmark" [ref=e312]
+                      - button "Share" [ref=e316]
+        - listitem [ref=e320]:
+          - link [ref=e322] [cursor=pointer]:
+            - article [ref=e323]:
+              - generic [ref=e324]:
+                - link [ref=e327]:
+                  - /url: /elonmusk
+                  - img "@elonmusk" [ref=e329]
+                - generic [ref=e330]:
+                  - generic [ref=e331]:
+                    - generic [ref=e332]:
+                      - generic [ref=e333]:
+                        - generic [ref=e335]:
+                          - generic [ref=e336]:
+                            - link "Elon Musk" [ref=e337]:
+                              - /url: https://x.com/elonmusk
+                            - generic [ref=e340]:
+                              - button "Verified account" [ref=e341]
+                              - link "X" [ref=e344]:
+                                - /url: https://twitter.com/X
+                                - img "X" [ref=e347]
+                          - link "@elonmusk" [ref=e349]:
+                            - /url: https://x.com/elonmusk
+                        - generic [ref=e350]:
+                          - text: ·
+                          - link "3h" [ref=e351]:
+                            - /url: /elonmusk/status/2096294063666286708
+                      - button "More" [ref=e353]
+                    - generic [ref=e357]: He was right
+                  - link [ref=e360]:
+                    - article [ref=e361]:
+                      - generic [ref=e363]:
+                        - generic [ref=e364]:
+                          - link [ref=e365]:
+                            - /url: /Kristof_Poland
+                            - img "@Kristof_Poland" [ref=e367]
+                          - generic [ref=e368]:
+                            - generic [ref=e370]:
+                              - generic [ref=e371]:
+                                - link "Krzysztof Szczawinski 🇵🇱" [ref=e372]:
+                                  - /url: https://x.com/Kristof_Poland
+                                - button "Verified account" [ref=e376]
+                              - link "@Kristof_Poland" [ref=e380]:
+                                - /url: https://x.com/Kristof_Poland
+                            - generic [ref=e381]:
+                              - text: ·
+                              - link "9h" [ref=e382]:
+                                - /url: /Kristof_Poland/status/2096207075386786042
+                        - generic [ref=e383]:
+                          - text: Antonio Gramsci – The Most Dangerous Intellectual of the Twentieth Century. Not the most famous. Not the most read. The most dangerous and the most consequential – because he was the one who figured out why the revolution kept failing, and what to do instead. The man who
+                          - button "Show more" [ref=e384]
+                      - generic [ref=e386]:
+                        - link "Image" [ref=e388]:
+                          - /url: /Kristof_Poland/status/2096207075386786042/photo/1
+                        - link "View media" [ref=e389]:
+                          - /url: /Kristof_Poland/status/2096207075386786042/photo/1
+                  - generic [ref=e390]:
+                    - link "Reply" [ref=e392]:
+                      - /url: /i/status/2096294063666286708
+                      - generic [ref=e393]: "999"
+                    - button "Repost" [ref=e400]:
+                      - generic [ref=e401]: "1083"
+                    - button "Like" [ref=e408]:
+                      - generic [ref=e409]: "6442"
+                    - button "View count" [ref=e416]:
+                      - generic [ref=e417]: 222万
+                    - generic [ref=e423]:
+                      - button "Bookmark" [ref=e425]
+                      - button "Share" [ref=e429]
+        - listitem [ref=e433]:
+          - link [ref=e435] [cursor=pointer]:
+            - article [ref=e436]:
+              - generic [ref=e437]:
+                - link [ref=e440]:
+                  - /url: /elonmusk
+                  - img "@elonmusk" [ref=e442]
+                - generic [ref=e443]:
+                  - generic [ref=e444]:
+                    - generic [ref=e445]:
+                      - generic [ref=e446]:
+                        - generic [ref=e448]:
+                          - generic [ref=e449]:
+                            - link "Elon Musk" [ref=e450]:
+                              - /url: https://x.com/elonmusk
+                            - generic [ref=e453]:
+                              - button "Verified account" [ref=e454]
+                              - link "X" [ref=e457]:
+                                - /url: https://twitter.com/X
+                                - img "X" [ref=e460]
+                          - link "@elonmusk" [ref=e462]:
+                            - /url: https://x.com/elonmusk
+                        - generic [ref=e463]:
+                          - text: ·
+                          - link "4h" [ref=e464]:
+                            - /url: /elonmusk/status/2096288211962056736
+                      - button "More" [ref=e466]
+                    - generic [ref=e470]: Humanity is dying out
+                  - link [ref=e473]:
+                    - article [ref=e474]:
+                      - generic [ref=e476]:
+                        - generic [ref=e477]:
+                          - link [ref=e478]:
+                            - /url: /Polymarket
+                            - img "@Polymarket" [ref=e480]
+                          - generic [ref=e481]:
+                            - generic [ref=e483]:
+                              - generic [ref=e484]:
+                                - link "Polymarket" [ref=e485]:
+                                  - /url: https://x.com/Polymarket
+                                - button "Verified account" [ref=e489]
+                              - link "@Polymarket" [ref=e496]:
+                                - /url: https://x.com/Polymarket
+                            - generic [ref=e497]:
+                              - text: ·
+                              - link "6h" [ref=e498]:
+                                - /url: /Polymarket/status/2096250204693332372
+                        - generic [ref=e499]: "JUST IN: People aged 65 & older now outnumber children 5 & under worldwide for the first time in recorded history."
+                  - generic [ref=e500]:
+                    - link "Reply" [ref=e502]:
+                      - /url: /i/status/2096288211962056736
+                      - generic [ref=e503]: "6454"
+                    - button "Repost" [ref=e510]:
+                      - generic [ref=e511]: "3848"
+                    - button "Like" [ref=e518]:
+                      - generic [ref=e519]: 2.9万
+                    - button "View count" [ref=e526]:
+                      - generic [ref=e527]: 260万
+                    - generic [ref=e533]:
+                      - button "Bookmark" [ref=e535]
+                      - button "Share" [ref=e539]
+        - listitem [ref=e543]:
+          - link [ref=e545] [cursor=pointer]:
+            - article [ref=e546]:
+              - generic [ref=e547]:
+                - link [ref=e550]:
+                  - /url: /elonmusk
+                  - img "@elonmusk" [ref=e552]
+                - generic [ref=e553]:
+                  - generic [ref=e554]:
+                    - generic [ref=e555]:
+                      - generic [ref=e556]:
+                        - generic [ref=e558]:
+                          - generic [ref=e559]:
+                            - link "Elon Musk" [ref=e560]:
+                              - /url: https://x.com/elonmusk
+                            - generic [ref=e563]:
+                              - button "Verified account" [ref=e564]
+                              - link "X" [ref=e567]:
+                                - /url: https://twitter.com/X
+                                - img "X" [ref=e570]
+                          - link "@elonmusk" [ref=e572]:
+                            - /url: https://x.com/elonmusk
+                        - generic [ref=e573]:
+                          - text: ·
+                          - link "6h" [ref=e574]:
+                            - /url: /elonmusk/status/2096256303895081204
+                      - button "More" [ref=e576]
+                    - generic [ref=e580]: Over 600 autonomous rocket landings so far
+                  - link [ref=e583]:
+                    - article [ref=e584]:
+                      - generic [ref=e586]:
+                        - generic [ref=e587]:
+                          - link [ref=e588]:
+                            - /url: /XFreeze
+                            - img "@XFreeze" [ref=e590]
+                          - generic [ref=e591]:
+                            - generic [ref=e593]:
+                              - generic [ref=e594]:
+                                - link "X Freeze" [ref=e595]:
+                                  - /url: https://x.com/XFreeze
+                                - button "Verified account" [ref=e599]
+                              - link "@XFreeze" [ref=e603]:
+                                - /url: https://x.com/XFreeze
+                            - generic [ref=e604]:
+                              - text: ·
+                              - link "7h" [ref=e605]:
+                                - /url: /XFreeze/status/2096241503064723885
+                        - generic [ref=e606]:
+                          - text: Most people don’t realize how insanely autonomous Falcon 9 already is Once Falcon 9 lifts off, almost the entire mission is executed by the rocket itself And the crazy part is This autonomy does not depend on generative AI It comes from brutally refined flight software,
+                          - button "Show more" [ref=e607]
+                      - generic [ref=e609]:
+                        - link "Image" [ref=e611]:
+                          - /url: /XFreeze/status/2096241503064723885/photo/1
+                        - link "View media" [ref=e612]:
+                          - /url: /XFreeze/status/2096241503064723885/photo/1
+                  - generic [ref=e613]:
+                    - link "Reply" [ref=e615]:
+                      - /url: /i/status/2096256303895081204
+                      - generic [ref=e616]: "1426"
+                    - button "Repost" [ref=e623]:
+                      - generic [ref=e624]: "2049"
+                    - button "Like" [ref=e631]:
+                      - generic [ref=e632]: 1.5万
+                    - button "View count" [ref=e639]:
+                      - generic [ref=e640]: 187万
+                    - generic [ref=e646]:
+                      - button "Bookmark" [ref=e648]
+                      - button "Share" [ref=e652]
+      - generic [ref=e656]:
+        - status [ref=e658]
+        - status [ref=e673]
+  - complementary [ref=e687]:
+    - generic [ref=e688]:
+      - generic [ref=e689]:
+        - heading "Log in or sign up for X" [level=2] [ref=e690]
+        - generic [ref=e691]:
+          - paragraph [ref=e692]: See what’s happening and join the conversation
+          - generic [ref=e693]:
+            - link "Continue with phone" [ref=e694] [cursor=pointer]:
+              - /url: /i/jf/onboarding/web?mode=signup&redirect_after_login=%2Felonmusk
+            - button "Continue with Apple" [disabled] [ref=e697]
+            - button "Continue with Google" [disabled] [ref=e700]
+          - generic [ref=e706]: or
+          - link "Log in with username or email" [ref=e709] [cursor=pointer]:
+            - /url: /i/jf/onboarding/web?mode=login&redirect_after_login=%2Felonmusk
+      - navigation "Footer" [ref=e712]:
+        - generic [ref=e713]:
+          - link "Terms" [ref=e714] [cursor=pointer]:
+            - /url: https://x.com/tos
+          - generic [ref=e715]: ·
+        - generic [ref=e716]:
+          - link "Privacy" [ref=e717] [cursor=pointer]:
+            - /url: https://x.com/privacy
+          - generic [ref=e718]: ·
+        - generic [ref=e719]:
+          - link "Cookies" [ref=e720] [cursor=pointer]:
+            - /url: https://support.x.com/articles/20170514
+          - generic [ref=e721]: ·
+        - generic [ref=e722]:
+          - link "Accessibility" [ref=e723] [cursor=pointer]:
+            - /url: https://help.x.com/resources/accessibility
+          - generic [ref=e724]: ·
+        - generic [ref=e725]:
+          - link "US TIDA" [ref=e726] [cursor=pointer]:
+            - /url: https://help.x.com/en/rules-and-policies/us-tida
+          - generic [ref=e727]: ·
+        - generic [ref=e728]:
+          - link "Ads Info" [ref=e729] [cursor=pointer]:
+            - /url: https://business.x.com/en/help/troubleshooting/how-twitter-ads-work.html?ref=web-twc-ao-gbl-adsinfo&utm_source=twc&utm_medium=web&utm_campaign=ao&utm_content=adsinfo
+          - generic [ref=e730]: ·
+        - button "More" [ref=e731] [cursor=pointer]
+        - generic [ref=e734]: © 2026 X Corp.

@@ -1,0 +1,357 @@
+- generic [ref=f13e2]:
+  - banner [ref=f13e3]:
+    - link "X" [ref=f13e4] [cursor=pointer]:
+      - /url: /
+  - main [ref=f13e7]:
+    - generic [ref=f13e8]:
+      - button "Back" [ref=f13e9] [cursor=pointer]
+      - generic [ref=f13e12]:
+        - generic [ref=f13e14]:
+          - generic [ref=f13e15]: NASA
+          - button "Verified account" [ref=f13e19] [cursor=pointer]
+        - generic [ref=f13e22]: 74.3K posts
+      - button "Grok" [ref=f13e23] [cursor=pointer]
+      - button "Search" [ref=f13e26] [cursor=pointer]
+    - link "Opens header photo" [ref=f13e30] [cursor=pointer]:
+      - /url: /NASA/header_photo
+      - img "NASA profile banner" [ref=f13e31]
+    - generic [ref=f13e32]:
+      - generic [ref=f13e33]:
+        - generic [ref=f13e34]:
+          - link "Opens profile photo" [ref=f13e36] [cursor=pointer]:
+            - /url: /NASA/photo
+            - img "@NASA" [ref=f13e38]
+          - generic [ref=f13e39]:
+            - generic [ref=f13e40]:
+              - heading "NASA" [level=1] [ref=f13e41]
+              - button "Verified account" [ref=f13e45] [cursor=pointer]
+            - generic [ref=f13e48]: "@NASA"
+        - generic [ref=f13e50]: Making the seemingly impossible, possible. ✨
+        - generic [ref=f13e51]:
+          - generic [ref=f13e52]: Pale Blue Dot
+          - link "nasa.gov" [ref=f13e59] [cursor=pointer]:
+            - /url: https://t.co/9NkQJKAVks
+          - generic [ref=f13e60]: Born 1958年10月1日
+          - link "Joined 2007年12月" [ref=f13e67] [cursor=pointer]:
+            - /url: /NASA/about
+        - generic [ref=f13e68]:
+          - link "117 Following" [ref=f13e69] [cursor=pointer]:
+            - /url: /NASA/following
+            - generic [ref=f13e70]:
+              - generic [ref=f13e71]: "117"
+              - generic [ref=f13e72]: Following
+          - link "9238.4万 Followers" [ref=f13e73] [cursor=pointer]:
+            - /url: /NASA/verified_followers
+            - generic [ref=f13e74]:
+              - generic [ref=f13e75]: 9238.4万
+              - generic [ref=f13e76]: Followers
+      - generic [ref=f13e77]:
+        - generic [ref=f13e78]:
+          - button "Mention" [ref=f13e80] [cursor=pointer]
+          - link "Mention" [ref=f13e82] [cursor=pointer]:
+            - /url: /compose/post?text=%40NASA+
+        - generic [ref=f13e84]:
+          - button "Follow" [ref=f13e86] [cursor=pointer]
+          - link "Follow" [ref=f13e88] [cursor=pointer]:
+            - /url: /NASA
+      - tablist [ref=f13e91]:
+        - tab "Posts" [selected] [ref=f13e92] [cursor=pointer]
+        - tab "Replies" [ref=f13e102] [cursor=pointer]
+        - tab "Reposts" [ref=f13e106] [cursor=pointer]
+        - tab "Media" [ref=f13e110] [cursor=pointer]
+    - generic [ref=f13e116]:
+      - list [ref=f13e117]:
+        - listitem [ref=f13e118]:
+          - link [ref=f13e120] [cursor=pointer]:
+            - article [ref=f13e121]:
+              - generic [ref=f13e122]:
+                - link [ref=f13e125]:
+                  - /url: /NASA
+                  - img "@NASA" [ref=f13e127]
+                - generic [ref=f13e128]:
+                  - generic [ref=f13e129]:
+                    - generic [ref=f13e130]:
+                      - generic [ref=f13e131]:
+                        - generic [ref=f13e133]:
+                          - generic [ref=f13e134]:
+                            - link "NASA" [ref=f13e135]:
+                              - /url: https://x.com/NASA
+                            - button "Verified account" [ref=f13e139]
+                          - link "@NASA" [ref=f13e143]:
+                            - /url: https://x.com/NASA
+                        - generic [ref=f13e144]:
+                          - text: ·
+                          - link "9月4日" [ref=f13e145]:
+                            - /url: /NASA/status/2095890073031966734
+                      - button "More" [ref=f13e147]
+                    - generic [ref=f13e151]:
+                      - text: "AvGeeks, assemble! MAX POWER lands in Florida on Nov. 7–8, with an F‑104 flyover by the Starfighters and NASA’s ER‑2 on static display. Get the details:"
+                      - link "nasa.gov/maxpower" [ref=f13e152]:
+                        - /url: https://www.nasa.gov/maxpower
+                  - generic [ref=f13e156]:
+                    - generic [ref=f13e161]:
+                      - button "Play" [ref=f13e162]
+                      - button "Play" [ref=f13e163]
+                      - generic: 00:00
+                    - link "View media" [ref=f13e170]:
+                      - /url: /NASA/status/2095890073031966734/video/1
+                  - generic [ref=f13e171]:
+                    - link "Reply" [ref=f13e173]:
+                      - /url: /i/status/2095890073031966734
+                      - generic [ref=f13e174]: "73"
+                    - button "Repost" [ref=f13e181]:
+                      - generic [ref=f13e182]: "244"
+                    - button "Like" [ref=f13e189]:
+                      - generic [ref=f13e190]: "1617"
+                    - button "View count" [ref=f13e197]:
+                      - generic [ref=f13e198]: 86万
+                    - generic [ref=f13e204]:
+                      - button "Bookmark" [ref=f13e206]
+                      - button "Share" [ref=f13e210]
+        - listitem [ref=f13e214]:
+          - link [ref=f13e216] [cursor=pointer]:
+            - article [ref=f13e217]:
+              - generic [ref=f13e218]:
+                - link [ref=f13e221]:
+                  - /url: /NASA
+                  - img "@NASA" [ref=f13e223]
+                - generic [ref=f13e224]:
+                  - generic [ref=f13e225]:
+                    - generic [ref=f13e226]:
+                      - generic [ref=f13e227]:
+                        - generic [ref=f13e229]:
+                          - generic [ref=f13e230]:
+                            - link "NASA" [ref=f13e231]:
+                              - /url: https://x.com/NASA
+                            - button "Verified account" [ref=f13e235]
+                          - link "@NASA" [ref=f13e239]:
+                            - /url: https://x.com/NASA
+                        - generic [ref=f13e240]:
+                          - text: ·
+                          - link "9月3日" [ref=f13e241]:
+                            - /url: /NASA/status/2095585125627003244
+                      - button "More" [ref=f13e243]
+                    - generic [ref=f13e247]:
+                      - text: An uncrewed Progress cargo spacecraft carrying food, fuel, and supplies is scheduled to lift off on a two-day flight to the
+                      - link "@Space_Station" [ref=f13e248]:
+                        - /url: https://x.com/Space_Station
+                      - text: "on Wednesday, Sept. 9. We will be broadcasting its launch and arrival live. How to tune in:"
+                      - link "go.nasa.gov/4gzfYyG" [ref=f13e249]:
+                        - /url: https://go.nasa.gov/4gzfYyG
+                  - generic [ref=f13e253]:
+                    - 'link "The Progress 92 cargo spacecraft viewed from the International Space Station as it flies into an orbital sunset. Earth''s blue limb stretches diagonally across the photo. Credit: NASA" [ref=f13e255]':
+                      - /url: /NASA/status/2095585125627003244/photo/1
+                      - 'img "The Progress 92 cargo spacecraft viewed from the International Space Station as it flies into an orbital sunset. Earth''s blue limb stretches diagonally across the photo. Credit: NASA" [ref=f13e256]'
+                    - link "View media" [ref=f13e257]:
+                      - /url: /NASA/status/2095585125627003244/photo/1
+                  - generic [ref=f13e258]:
+                    - link "Reply" [ref=f13e260]:
+                      - /url: /i/status/2095585125627003244
+                      - generic [ref=f13e261]: "152"
+                    - button "Repost" [ref=f13e268]:
+                      - generic [ref=f13e269]: "480"
+                    - button "Like" [ref=f13e276]:
+                      - generic [ref=f13e277]: "3695"
+                    - button "View count" [ref=f13e284]:
+                      - generic [ref=f13e285]: 87万
+                    - generic [ref=f13e291]:
+                      - button "Bookmark" [ref=f13e293]
+                      - button "Share" [ref=f13e297]
+        - listitem [ref=f13e301]:
+          - link [ref=f13e303] [cursor=pointer]:
+            - article [ref=f13e304]:
+              - generic [ref=f13e305]:
+                - link [ref=f13e308]:
+                  - /url: /NASA
+                  - img "@NASA" [ref=f13e310]
+                - generic [ref=f13e311]:
+                  - generic [ref=f13e312]:
+                    - generic [ref=f13e313]:
+                      - generic [ref=f13e314]:
+                        - generic [ref=f13e316]:
+                          - generic [ref=f13e317]:
+                            - link "NASA" [ref=f13e318]:
+                              - /url: https://x.com/NASA
+                            - button "Verified account" [ref=f13e322]
+                          - link "@NASA" [ref=f13e326]:
+                            - /url: https://x.com/NASA
+                        - generic [ref=f13e327]:
+                          - text: ·
+                          - link "9月2日" [ref=f13e328]:
+                            - /url: /NASA/status/2095206153277862026
+                      - button "More" [ref=f13e330]
+                    - generic [ref=f13e334]:
+                      - text: “They’re an all-star team.” In the most recent episode of Houston We Have a Podcast, Artemis III Chief Training Officer Debbie O’Connell discusses how the crew is preparing for each phase of their mission, from launch to splashdown.
+                      - link "go.nasa.gov/4ydXwBz" [ref=f13e335]:
+                        - /url: https://go.nasa.gov/4ydXwBz
+                  - generic [ref=f13e339]:
+                    - 'link "Artemis III crew members, NASA astronauts Randy Bresnick (left) and Andre Douglas, take a selfie in front of the right-hand aft assembly solid rocket booster segment of the Artemis III Space Launch System rocket inside the Vehicle Assembly Building at NASA’s Kennedy Space Center in Florida. Credit: NASA/Kim Shiflett" [ref=f13e341]':
+                      - /url: /NASA/status/2095206153277862026/photo/1
+                      - 'img "Artemis III crew members, NASA astronauts Randy Bresnick (left) and Andre Douglas, take a selfie in front of the right-hand aft assembly solid rocket booster segment of the Artemis III Space Launch System rocket inside the Vehicle Assembly Building at NASA’s Kennedy Space Center in Florida. Credit: NASA/Kim Shiflett" [ref=f13e342]'
+                    - link "View media" [ref=f13e343]:
+                      - /url: /NASA/status/2095206153277862026/photo/1
+                  - generic [ref=f13e344]:
+                    - link "Reply" [ref=f13e346]:
+                      - /url: /i/status/2095206153277862026
+                      - generic [ref=f13e347]: "103"
+                    - button "Repost" [ref=f13e354]:
+                      - generic [ref=f13e355]: "205"
+                    - button "Like" [ref=f13e362]:
+                      - generic [ref=f13e363]: "1816"
+                    - button "View count" [ref=f13e370]:
+                      - generic [ref=f13e371]: 76万
+                    - generic [ref=f13e377]:
+                      - button "Bookmark" [ref=f13e379]
+                      - button "Share" [ref=f13e383]
+        - listitem [ref=f13e387]:
+          - link [ref=f13e389] [cursor=pointer]:
+            - article [ref=f13e390]:
+              - generic [ref=f13e391]:
+                - link [ref=f13e394]:
+                  - /url: /NASA
+                  - img "@NASA" [ref=f13e396]
+                - generic [ref=f13e397]:
+                  - generic [ref=f13e398]:
+                    - generic [ref=f13e399]:
+                      - generic [ref=f13e400]:
+                        - generic [ref=f13e402]:
+                          - generic [ref=f13e403]:
+                            - link "NASA" [ref=f13e404]:
+                              - /url: https://x.com/NASA
+                            - button "Verified account" [ref=f13e408]
+                          - link "@NASA" [ref=f13e412]:
+                            - /url: https://x.com/NASA
+                        - generic [ref=f13e413]:
+                          - text: ·
+                          - link "9月1日" [ref=f13e414]:
+                            - /url: /NASA/status/2094884934510956691
+                      - button "More" [ref=f13e416]
+                    - generic [ref=f13e420]:
+                      - text: "The month of September brings a new season and skywatching opportunities. You can look forward to: - The Moon pointing out stellar sights - Venus hitting peak brilliance - Seasons shifting on Sept. 22 - The Harvest Moon Happy skywatching!"
+                      - link "go.nasa.gov/4wZB3Hy" [ref=f13e421]:
+                        - /url: https://go.nasa.gov/4wZB3Hy
+                  - generic [ref=f13e425]:
+                    - generic [ref=f13e430]:
+                      - button "Play" [ref=f13e431]
+                      - button "Play" [ref=f13e432]
+                      - generic: 00:00
+                    - link "View media" [ref=f13e439]:
+                      - /url: /NASA/status/2094884934510956691/video/1
+                  - generic [ref=f13e440]:
+                    - link "Reply" [ref=f13e442]:
+                      - /url: /i/status/2094884934510956691
+                      - generic [ref=f13e443]: "137"
+                    - button "Repost" [ref=f13e450]:
+                      - generic [ref=f13e451]: "567"
+                    - button "Like" [ref=f13e458]:
+                      - generic [ref=f13e459]: "3119"
+                    - button "View count" [ref=f13e466]:
+                      - generic [ref=f13e467]: 141万
+                    - generic [ref=f13e473]:
+                      - button "Bookmark" [ref=f13e475]
+                      - button "Share" [ref=f13e479]
+        - listitem [ref=f13e483]:
+          - link [ref=f13e485] [cursor=pointer]:
+            - article [ref=f13e486]:
+              - generic [ref=f13e487]:
+                - link [ref=f13e490]:
+                  - /url: /NASA
+                  - img "@NASA" [ref=f13e492]
+                - generic [ref=f13e493]:
+                  - generic [ref=f13e494]:
+                    - generic [ref=f13e495]:
+                      - generic [ref=f13e496]:
+                        - generic [ref=f13e498]:
+                          - generic [ref=f13e499]:
+                            - link "NASA" [ref=f13e500]:
+                              - /url: https://x.com/NASA
+                            - button "Verified account" [ref=f13e504]
+                          - link "@NASA" [ref=f13e508]:
+                            - /url: https://x.com/NASA
+                        - generic [ref=f13e509]:
+                          - text: ·
+                          - link "9月1日" [ref=f13e510]:
+                            - /url: /NASA/status/2094742199736926232
+                      - button "More" [ref=f13e512]
+                    - generic [ref=f13e516]:
+                      - text: "LIVE: Join us to watch today's spacewalk as"
+                      - link "@Astro_Jessica" [ref=f13e517]:
+                        - /url: https://x.com/Astro_Jessica
+                      - text: and
+                      - link "@Soph_astro" [ref=f13e518]:
+                        - /url: https://x.com/Soph_astro
+                      - text: work on maintenance outside the International Space Station.
+                  - generic [ref=f13e521]:
+                    - link "REPLAY" [ref=f13e522]:
+                      - /url: https://x.com/i/broadcasts/1RKZzBVPgXwKB
+                    - generic [ref=f13e527]:
+                      - 'link "Open broadcast: U.S. Spacewalk 99" [ref=f13e528]':
+                        - /url: https://x.com/i/broadcasts/1RKZzBVPgXwKB
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img "@NASA"
+                          - generic:
+                            - generic:
+                              - generic:
+                                - generic: NASA
+                                - button "Verified account" [ref=f13e529]
+                            - generic: "@NASA"
+                        - generic: U.S. Spacewalk 99
+                  - generic [ref=f13e532]:
+                    - link "Reply" [ref=f13e534]:
+                      - /url: /i/status/2094742199736926232
+                      - generic [ref=f13e535]: "418"
+                    - button "Repost" [ref=f13e542]:
+                      - generic [ref=f13e543]: "1471"
+                    - button "Like" [ref=f13e550]:
+                      - generic [ref=f13e551]: 1万
+                    - button "View count" [ref=f13e558]:
+                      - generic [ref=f13e559]: 154万
+                    - generic [ref=f13e565]:
+                      - button "Bookmark" [ref=f13e567]
+                      - button "Share" [ref=f13e571]
+      - generic [ref=f13e575]:
+        - status [ref=f13e577]
+        - status [ref=f13e592]
+  - complementary [ref=f13e606]:
+    - generic [ref=f13e607]:
+      - generic [ref=f13e608]:
+        - heading "Log in or sign up for X" [level=2] [ref=f13e609]
+        - generic [ref=f13e610]:
+          - paragraph [ref=f13e611]: See what’s happening and join the conversation
+          - generic [ref=f13e612]:
+            - link "Continue with phone" [ref=f13e613] [cursor=pointer]:
+              - /url: /i/jf/onboarding/web?mode=signup&redirect_after_login=%2FNASA
+            - button "Continue with Apple" [disabled] [ref=f13e616]
+            - button "Continue with Google" [disabled] [ref=f13e619]
+          - generic [ref=f13e625]: or
+          - link "Log in with username or email" [ref=f13e628] [cursor=pointer]:
+            - /url: /i/jf/onboarding/web?mode=login&redirect_after_login=%2FNASA
+      - navigation "Footer" [ref=f13e631]:
+        - generic [ref=f13e632]:
+          - link "Terms" [ref=f13e633] [cursor=pointer]:
+            - /url: https://x.com/tos
+          - generic [ref=f13e634]: ·
+        - generic [ref=f13e635]:
+          - link "Privacy" [ref=f13e636] [cursor=pointer]:
+            - /url: https://x.com/privacy
+          - generic [ref=f13e637]: ·
+        - generic [ref=f13e638]:
+          - link "Cookies" [ref=f13e639] [cursor=pointer]:
+            - /url: https://support.x.com/articles/20170514
+          - generic [ref=f13e640]: ·
+        - generic [ref=f13e641]:
+          - link "Accessibility" [ref=f13e642] [cursor=pointer]:
+            - /url: https://help.x.com/resources/accessibility
+          - generic [ref=f13e643]: ·
+        - generic [ref=f13e644]:
+          - link "US TIDA" [ref=f13e645] [cursor=pointer]:
+            - /url: https://help.x.com/en/rules-and-policies/us-tida
+          - generic [ref=f13e646]: ·
+        - generic [ref=f13e647]:
+          - link "Ads Info" [ref=f13e648] [cursor=pointer]:
+            - /url: https://business.x.com/en/help/troubleshooting/how-twitter-ads-work.html?ref=web-twc-ao-gbl-adsinfo&utm_source=twc&utm_medium=web&utm_campaign=ao&utm_content=adsinfo
+          - generic [ref=f13e649]: ·
+        - button "More" [ref=f13e650] [cursor=pointer]
+        - generic [ref=f13e653]: © 2026 X Corp.

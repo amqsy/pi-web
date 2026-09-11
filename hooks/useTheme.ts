@@ -1,11 +1,9 @@
 "use client";
 
 import { useCallback, useSyncExternalStore } from "react";
+import { isDarkTheme, isThemePreference, type ThemePreference, type ResolvedTheme } from "@/lib/theme";
 
-export type ThemePreference = "light" | "dark" | "auto" | "macchiato";
-export type ResolvedTheme = "light" | "dark";
-
-const CATPPUCCIN_PREFERENCES = ["macchiato"] as const;
+export type { ThemePreference, ResolvedTheme } from "@/lib/theme";
 
 type ThemeState = {
   preference: ThemePreference;
@@ -15,7 +13,6 @@ type ThemeState = {
 type ToggleOrigin = { x: number; y: number };
 
 const STORAGE_KEY = "pi-theme";
-const PREFERENCE_CYCLE: ThemePreference[] = ["light", "dark", "auto", "macchiato"];
 const SERVER_SNAPSHOT: ThemeState = { preference: "auto", theme: "light" };
 
 const listeners = new Set<() => void>();
@@ -34,10 +31,7 @@ function getSystemTheme(): ResolvedTheme {
 function readStoredPreference(): ThemePreference {
   try {
     const value = localStorage.getItem(STORAGE_KEY);
-    if (
-      value === "light" || value === "dark" || value === "auto" ||
-      (value !== null && (CATPPUCCIN_PREFERENCES as readonly string[]).includes(value))
-    ) return value as ThemePreference;
+    if (isThemePreference(value)) return value;
   } catch {
     // ignore storage errors (private mode, quota, etc.)
   }
@@ -45,17 +39,13 @@ function readStoredPreference(): ThemePreference {
 }
 
 function resolveTheme(preference: ThemePreference): ResolvedTheme {
-  if (preference === "auto") return getSystemTheme();
-  return preference === "dark" || preference === "macchiato"
-    ? "dark"
-    : "light";
+  return preference === "auto" ? getSystemTheme() : preference;
 }
 
-function applyDomTheme(theme: ResolvedTheme, preference?: ThemePreference): void {
+function applyDomTheme(theme: ResolvedTheme): void {
   if (typeof document === "undefined") return;
-  const root = document.documentElement;
-  root.classList.toggle("dark", theme === "dark");
-  for (const flavor of CATPPUCCIN_PREFERENCES) root.classList.toggle(`catppuccin-${flavor}`, preference === flavor);
+  document.documentElement.dataset.theme = theme;
+  document.documentElement.classList.toggle("dark", isDarkTheme(theme));
 }
 
 function ensureState(): ThemeState {
@@ -64,13 +54,13 @@ function ensureState(): ThemeState {
 
   const preference = readStoredPreference();
   const theme = resolveTheme(preference);
-  applyDomTheme(theme, preference);
+  applyDomTheme(theme);
   state = { preference, theme };
   return state;
 }
 
 function setThemeState(preference: ThemePreference, theme: ResolvedTheme, persist: boolean): void {
-  applyDomTheme(theme, preference);
+  applyDomTheme(theme);
   if (persist) {
     try {
       localStorage.setItem(STORAGE_KEY, preference);
@@ -119,11 +109,6 @@ function getSnapshot(): ThemeState {
 
 function getServerSnapshot(): ThemeState {
   return SERVER_SNAPSHOT;
-}
-
-function nextPreference(preference: ThemePreference): ThemePreference {
-  const index = PREFERENCE_CYCLE.indexOf(preference);
-  return PREFERENCE_CYCLE[(index + 1) % PREFERENCE_CYCLE.length];
 }
 
 export function useTheme() {
@@ -175,16 +160,10 @@ export function useTheme() {
       });
   }, []);
 
-  const toggleTheme = useCallback((origin?: ToggleOrigin) => {
-    const current = ensureState();
-    setThemePreference(nextPreference(current.preference), origin);
-  }, [setThemePreference]);
-
   return {
     theme: snapshot.theme,
     preference: snapshot.preference,
     setThemePreference,
-    toggleTheme,
-    isDark: snapshot.theme === "dark",
+    isDark: isDarkTheme(snapshot.theme),
   };
 }

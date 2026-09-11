@@ -31,6 +31,6 @@ test("passes isStreaming to trailing assistant message during live tail and forw
   );
   assert.match(
     source,
-    /<MessageView message=\{streamState\.streamingMessage as AgentMessage\} isStreaming=\{true\}/,
+    /<MessageView message=\{streamState\.streamingMessage as AgentMessage\} toolResults=\{toolResultsMap\} isStreaming\b/,
   );
 });

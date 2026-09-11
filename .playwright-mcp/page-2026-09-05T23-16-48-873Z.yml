@@ -1,0 +1,350 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - link "X" [ref=e4] [cursor=pointer]:
+      - /url: /
+  - main [ref=e7]:
+    - generic [ref=e8]:
+      - button "Back" [ref=e9] [cursor=pointer]
+      - generic [ref=e12]:
+        - generic [ref=e14]:
+          - generic [ref=e15]: Mikanrico
+          - button "Verified account" [ref=e19] [cursor=pointer]
+        - generic [ref=e22]: 2,473 posts
+      - button "Grok" [ref=e23] [cursor=pointer]
+      - button "Search" [ref=e26] [cursor=pointer]
+    - link "Opens header photo" [ref=e30] [cursor=pointer]:
+      - /url: /Mikanrico/header_photo
+      - img "Mikanrico profile banner" [ref=e31]
+    - generic [ref=e32]:
+      - generic [ref=e33]:
+        - generic [ref=e34]:
+          - link "Opens profile photo" [ref=e36] [cursor=pointer]:
+            - /url: /Mikanrico/photo
+            - img "@Mikanrico" [ref=e38]
+          - generic [ref=e39]:
+            - generic [ref=e40]:
+              - heading "Mikanrico" [level=1] [ref=e41]
+              - button "Verified account" [ref=e45] [cursor=pointer]
+            - generic [ref=e48]: "@Mikanrico"
+        - generic [ref=e50]: 我的精力有限，不产出有质量的内容，不要以互fo为目的关注我
+        - link "Joined 2016年1月" [ref=e55] [cursor=pointer]:
+          - /url: /Mikanrico/about
+        - generic [ref=e56]:
+          - link "125 Following" [ref=e57] [cursor=pointer]:
+            - /url: /Mikanrico/following
+            - generic [ref=e58]:
+              - generic [ref=e59]: "125"
+              - generic [ref=e60]: Following
+          - link "1,553 Followers" [ref=e61] [cursor=pointer]:
+            - /url: /Mikanrico/verified_followers
+            - generic [ref=e62]:
+              - generic [ref=e63]: 1,553
+              - generic [ref=e64]: Followers
+      - generic [ref=e65]:
+        - generic [ref=e66]:
+          - button "Mention" [ref=e68] [cursor=pointer]
+          - link "Mention" [ref=e70] [cursor=pointer]:
+            - /url: /compose/post?text=%40Mikanrico+
+        - generic [ref=e72]:
+          - button "Follow" [ref=e74] [cursor=pointer]
+          - link "Follow" [ref=e76] [cursor=pointer]:
+            - /url: /Mikanrico
+      - tablist [ref=e79]:
+        - tab "Posts" [selected] [ref=e80] [cursor=pointer]
+        - tab "Replies" [ref=e90] [cursor=pointer]
+        - tab "Reposts" [ref=e94] [cursor=pointer]
+        - tab "Media" [ref=e98] [cursor=pointer]
+    - generic [ref=e104]:
+      - list [ref=e105]:
+        - listitem [ref=e106]:
+          - link [ref=e108] [cursor=pointer]:
+            - article [ref=e109]:
+              - generic [ref=e110]:
+                - link [ref=e113]:
+                  - /url: /Mikanrico
+                  - img "@Mikanrico" [ref=e115]
+                - generic [ref=e116]:
+                  - generic [ref=e117]:
+                    - generic [ref=e118]:
+                      - generic [ref=e119]:
+                        - generic [ref=e121]:
+                          - generic [ref=e122]:
+                            - link "Mikanrico" [ref=e123]:
+                              - /url: https://x.com/Mikanrico
+                            - button "Verified account" [ref=e127]
+                          - link "@Mikanrico" [ref=e131]:
+                            - /url: https://x.com/Mikanrico
+                        - generic [ref=e132]:
+                          - text: ·
+                          - link "9月4日" [ref=e133]:
+                            - /url: /Mikanrico/status/2095892365462692135
+                      - button "More" [ref=e135]
+                    - generic [ref=e139]: 忽悠还有一张存货，最近上班太忙了没空拍照🫠
+                  - generic [ref=e143]:
+                    - link "Image" [ref=e145]:
+                      - /url: /Mikanrico/status/2095892365462692135/photo/1
+                    - link "View media" [ref=e146]:
+                      - /url: /Mikanrico/status/2095892365462692135/photo/1
+                  - generic [ref=e147]:
+                    - link "Reply" [ref=e149]:
+                      - /url: /i/status/2095892365462692135
+                      - generic [ref=e150]: "2"
+                    - button "Repost" [ref=e157]:
+                      - generic [ref=e158]: "37"
+                    - button "Like" [ref=e165]:
+                      - generic [ref=e166]: "944"
+                    - button "View count" [ref=e173]:
+                      - generic [ref=e174]: "9309"
+                    - generic [ref=e180]:
+                      - button "Bookmark" [ref=e182]
+                      - button "Share" [ref=e186]
+        - listitem [ref=e190]:
+          - link [ref=e192] [cursor=pointer]:
+            - article [ref=e193]:
+              - generic [ref=e194]:
+                - link [ref=e197]:
+                  - /url: /Mikanrico
+                  - img "@Mikanrico" [ref=e199]
+                - generic [ref=e200]:
+                  - generic [ref=e201]:
+                    - generic [ref=e202]:
+                      - generic [ref=e203]:
+                        - generic [ref=e205]:
+                          - generic [ref=e206]:
+                            - link "Mikanrico" [ref=e207]:
+                              - /url: https://x.com/Mikanrico
+                            - button "Verified account" [ref=e211]
+                          - link "@Mikanrico" [ref=e215]:
+                            - /url: https://x.com/Mikanrico
+                        - generic [ref=e216]:
+                          - text: ·
+                          - link "9月4日" [ref=e217]:
+                            - /url: /Mikanrico/status/2095861052756168820
+                      - button "More" [ref=e219]
+                    - generic [ref=e223]: 我会拉黑用图像生成式 AI 加工图片而且不标注 AI generated content 的人
+                  - generic [ref=e227]:
+                    - link "Image" [ref=e229]:
+                      - /url: /Mikanrico/status/2095861052756168820/photo/1
+                    - link "View media" [ref=e230]:
+                      - /url: /Mikanrico/status/2095861052756168820/photo/1
+                  - generic [ref=e231]:
+                    - link "Reply" [ref=e233]:
+                      - /url: /i/status/2095861052756168820
+                      - generic [ref=e234]: "1"
+                    - button "Repost" [ref=e241]
+                    - button "Like" [ref=e246]:
+                      - generic [ref=e247]: "11"
+                    - button "View count" [ref=e254]:
+                      - generic [ref=e255]: "808"
+                    - generic [ref=e261]:
+                      - button "Bookmark" [ref=e263]
+                      - button "Share" [ref=e267]
+        - listitem [ref=e271]:
+          - link [ref=e273] [cursor=pointer]:
+            - article [ref=e274]:
+              - generic [ref=e275]:
+                - link [ref=e278]:
+                  - /url: /Mikanrico
+                  - img "@Mikanrico" [ref=e280]
+                - generic [ref=e281]:
+                  - generic [ref=e282]:
+                    - generic [ref=e283]:
+                      - generic [ref=e284]:
+                        - generic [ref=e286]:
+                          - generic [ref=e287]:
+                            - link "Mikanrico" [ref=e288]:
+                              - /url: https://x.com/Mikanrico
+                            - button "Verified account" [ref=e292]
+                          - link "@Mikanrico" [ref=e296]:
+                            - /url: https://x.com/Mikanrico
+                        - generic [ref=e297]:
+                          - text: ·
+                          - link "9月2日" [ref=e298]:
+                            - /url: /Mikanrico/status/2095166629302944033
+                      - button "More" [ref=e300]
+                    - generic [ref=e304]: 攒钱速度完全赶不上RTX Pro 6000的涨价速度
+                  - generic [ref=e308]:
+                    - link "Image" [ref=e310]:
+                      - /url: /Mikanrico/status/2095166629302944033/photo/1
+                    - link "View media" [ref=e311]:
+                      - /url: /Mikanrico/status/2095166629302944033/photo/1
+                  - generic [ref=e312]:
+                    - link "Reply" [ref=e314]:
+                      - /url: /i/status/2095166629302944033
+                      - generic [ref=e315]: "1"
+                    - button "Repost" [ref=e322]
+                    - button "Like" [ref=e327]:
+                      - generic [ref=e328]: "7"
+                    - button "View count" [ref=e335]:
+                      - generic [ref=e336]: "902"
+                    - generic [ref=e342]:
+                      - button "Bookmark" [ref=e344]
+                      - button "Share" [ref=e348]
+        - listitem [ref=e352]:
+          - link [ref=e354] [cursor=pointer]:
+            - article [ref=e355]:
+              - generic [ref=e356]:
+                - link [ref=e359]:
+                  - /url: /Mikanrico
+                  - img "@Mikanrico" [ref=e361]
+                - generic [ref=e362]:
+                  - generic [ref=e363]:
+                    - generic [ref=e364]:
+                      - generic [ref=e365]:
+                        - generic [ref=e367]:
+                          - generic [ref=e368]:
+                            - link "Mikanrico" [ref=e369]:
+                              - /url: https://x.com/Mikanrico
+                            - button "Verified account" [ref=e373]
+                          - link "@Mikanrico" [ref=e377]:
+                            - /url: https://x.com/Mikanrico
+                        - generic [ref=e378]:
+                          - text: ·
+                          - link "9月2日" [ref=e379]:
+                            - /url: /Mikanrico/status/2095079066311487828
+                      - button "More" [ref=e381]
+                    - generic [ref=e385]: 这个挺好，现在DIY越来越难找到好 CMOS + ISP 组合，消费领域图像性能水平爆发增长，但个人用户完全没有研发能力，高性能CMOS为了控制功耗和满足带宽需求信号协议不得不做得很复杂，datasheet 也都仅 toB。ISP更是各家的核心竞争力，外界从基础硬件到开发测试工具链完全是断层的
+                  - link [ref=e388]:
+                    - article [ref=e389]:
+                      - generic [ref=e391]:
+                        - generic [ref=e392]:
+                          - link [ref=e393]:
+                            - /url: /cnxsoft
+                            - img "@cnxsoft" [ref=e395]
+                          - generic [ref=e396]:
+                            - generic [ref=e398]:
+                              - generic [ref=e399]:
+                                - link "CNX Software" [ref=e400]:
+                                  - /url: https://x.com/cnxsoft
+                                - button "Verified account" [ref=e404]
+                              - link "@cnxsoft" [ref=e408]:
+                                - /url: https://x.com/cnxsoft
+                            - generic [ref=e409]:
+                              - text: ·
+                              - link "9月2日" [ref=e410]:
+                                - /url: /cnxsoft/status/2095053829360517586
+                        - generic [ref=e411]:
+                          - text: "Modular camera: pick your interfaces, camera sensors, lens mounts, and lenses."
+                          - link "cnx-software.com/2026/09/02/cir…" [ref=e412]:
+                            - /url: https://www.cnx-software.com/2026/09/02/circuit-valley-chc5-a-modular-usb-hdmi-and-ethernet-camera-system/
+                          - text: Circuit Valley CHC5 is a modular camera system based on a Core board powered by an AMD/Xilinx Zynq-7020 SoC FPGA, a range of interface boards with USB, HDMI, or Ethernet (PoE),
+                          - button "Show more" [ref=e413]
+                      - generic [ref=e419]:
+                        - generic [ref=e421]:
+                          - link "Image" [ref=e423]:
+                            - /url: /cnxsoft/status/2095053829360517586/photo/1
+                          - link "View media" [ref=e424]:
+                            - /url: /cnxsoft/status/2095053829360517586/photo/1
+                        - generic [ref=e426]:
+                          - link "Image" [ref=e428]:
+                            - /url: /cnxsoft/status/2095053829360517586/photo/2
+                          - link "View media" [ref=e429]:
+                            - /url: /cnxsoft/status/2095053829360517586/photo/2
+                        - generic [ref=e431]:
+                          - link "Image" [ref=e433]:
+                            - /url: /cnxsoft/status/2095053829360517586/photo/3
+                          - link "View media" [ref=e434]:
+                            - /url: /cnxsoft/status/2095053829360517586/photo/3
+                        - generic [ref=e436]:
+                          - link "Image" [ref=e438]:
+                            - /url: /cnxsoft/status/2095053829360517586/photo/4
+                          - link "View media" [ref=e439]:
+                            - /url: /cnxsoft/status/2095053829360517586/photo/4
+                  - generic [ref=e440]:
+                    - link "Reply" [ref=e442]:
+                      - /url: /i/status/2095079066311487828
+                      - generic [ref=e443]: "34"
+                    - button "Repost" [ref=e450]
+                    - button "Like" [ref=e455]:
+                      - generic [ref=e456]: "10"
+                    - button "View count" [ref=e463]:
+                      - generic [ref=e464]: "1751"
+                    - generic [ref=e470]:
+                      - button "Bookmark" [ref=e472]
+                      - button "Share" [ref=e476]
+        - listitem [ref=e480]:
+          - link [ref=e482] [cursor=pointer]:
+            - article [ref=e483]:
+              - generic [ref=e484]:
+                - link [ref=e487]:
+                  - /url: /Mikanrico
+                  - img "@Mikanrico" [ref=e489]
+                - generic [ref=e490]:
+                  - generic [ref=e491]:
+                    - generic [ref=e492]:
+                      - generic [ref=e493]:
+                        - generic [ref=e495]:
+                          - generic [ref=e496]:
+                            - link "Mikanrico" [ref=e497]:
+                              - /url: https://x.com/Mikanrico
+                            - button "Verified account" [ref=e501]
+                          - link "@Mikanrico" [ref=e505]:
+                            - /url: https://x.com/Mikanrico
+                        - generic [ref=e506]:
+                          - text: ·
+                          - link "9月1日" [ref=e507]:
+                            - /url: /Mikanrico/status/2094834584487879159
+                      - button "More" [ref=e509]
+                    - generic [ref=e513]: 有 LLM 了真好啊，想要什么接口 APK 发过去半小时全逆完了，以前刀耕火种不得干几个通宵
+                  - generic [ref=e517]:
+                    - link "Image" [ref=e519]:
+                      - /url: /Mikanrico/status/2094834584487879159/photo/1
+                    - link "View media" [ref=e520]:
+                      - /url: /Mikanrico/status/2094834584487879159/photo/1
+                  - generic [ref=e521]:
+                    - link "Reply" [ref=e523]:
+                      - /url: /i/status/2094834584487879159
+                      - generic [ref=e524]: "40"
+                    - button "Repost" [ref=e531]:
+                      - generic [ref=e532]: "11"
+                    - button "Like" [ref=e539]:
+                      - generic [ref=e540]: "301"
+                    - button "View count" [ref=e547]:
+                      - generic [ref=e548]: 5.4万
+                    - generic [ref=e554]:
+                      - button "Bookmark" [ref=e556]
+                      - button "Share" [ref=e560]
+      - generic [ref=e564]:
+        - status [ref=e566]
+        - status [ref=e581]
+  - complementary [ref=e595]:
+    - generic [ref=e596]:
+      - generic [ref=e597]:
+        - heading "Log in or sign up for X" [level=2] [ref=e598]
+        - generic [ref=e599]:
+          - paragraph [ref=e600]: See what’s happening and join the conversation
+          - generic [ref=e601]:
+            - link "Continue with phone" [ref=e602] [cursor=pointer]:
+              - /url: /i/jf/onboarding/web?mode=signup&redirect_after_login=%2FMikanrico
+            - button "Continue with Apple" [disabled] [ref=e605]
+            - button "Continue with Google" [disabled] [ref=e608]
+          - generic [ref=e614]: or
+          - link "Log in with username or email" [ref=e617] [cursor=pointer]:
+            - /url: /i/jf/onboarding/web?mode=login&redirect_after_login=%2FMikanrico
+      - navigation "Footer" [ref=e620]:
+        - generic [ref=e621]:
+          - link "Terms" [ref=e622] [cursor=pointer]:
+            - /url: https://x.com/tos
+          - generic [ref=e623]: ·
+        - generic [ref=e624]:
+          - link "Privacy" [ref=e625] [cursor=pointer]:
+            - /url: https://x.com/privacy
+          - generic [ref=e626]: ·
+        - generic [ref=e627]:
+          - link "Cookies" [ref=e628] [cursor=pointer]:
+            - /url: https://support.x.com/articles/20170514
+          - generic [ref=e629]: ·
+        - generic [ref=e630]:
+          - link "Accessibility" [ref=e631] [cursor=pointer]:
+            - /url: https://help.x.com/resources/accessibility
+          - generic [ref=e632]: ·
+        - generic [ref=e633]:
+          - link "US TIDA" [ref=e634] [cursor=pointer]:
+            - /url: https://help.x.com/en/rules-and-policies/us-tida
+          - generic [ref=e635]: ·
+        - generic [ref=e636]:
+          - link "Ads Info" [ref=e637] [cursor=pointer]:
+            - /url: https://business.x.com/en/help/troubleshooting/how-twitter-ads-work.html?ref=web-twc-ao-gbl-adsinfo&utm_source=twc&utm_medium=web&utm_campaign=ao&utm_content=adsinfo
+          - generic [ref=e638]: ·
+        - button "More" [ref=e639] [cursor=pointer]
+        - generic [ref=e642]: © 2026 X Corp.
